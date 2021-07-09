@@ -14,7 +14,7 @@ function Home() {
     const classes = useStyles();
     return (
         <Grid container className={classes.root}>
-            Home
+            
         </Grid>
     )
 }
