@@ -7,27 +7,42 @@ import Home from "../Pages/home";
 import Login from "../Pages/login";
 import MenuBar from "../Components/menu_bar";
 import Signup from "../Pages/signup";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import green from '@material-ui/core/colors/green';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#9D383B",
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
 
 function App() {
   return (
-    <Router>
-      <div>
-        <MenuBar />
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div>
+          <MenuBar />
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
