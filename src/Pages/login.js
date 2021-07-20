@@ -20,7 +20,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://www.linkedin.com/in/mitev-dimitar/">
-        Dimitar Mitev
+        BookShelves, Dimitar Mitev
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -39,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+    color: "white",
+  },
+  header: {
+    fontSize: "6rem",
+    fontFamily: "'Pacifico', cursive",
+    transform: "rotate(-30deg)"
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -65,7 +71,14 @@ export default function Login() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid container alignItems="center" justify="center" direction="column" item xs={false} sm={4} md={7} className={classes.image}>
+        <Typography className={classes.header}>
+          Book
+        </Typography>
+        <Typography className={classes.header}>
+          Shelves
+        </Typography>
+      </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
