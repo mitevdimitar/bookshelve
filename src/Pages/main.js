@@ -1,8 +1,15 @@
 import React from "react";
 import Home from "./home";
+import Login from "./login";
 
-function Main() {
-  return <Home />;
+function Main({ auth }) {
+  return !auth.isEmpty ? <Home /> : <Login />;
 };
 
-export default Main;
+function mapStateToProps(state) {
+  return {
+    auth: state.firebaseReducer.auth
+  };
+}
+
+export default connect(mapStateToProps)(Main);
