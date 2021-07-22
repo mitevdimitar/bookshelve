@@ -3,7 +3,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Home from "../Pages/home";
+import Main from "../Pages/main";
 import Login from "../Pages/login";
 import MenuBar from "../Components/menu_bar";
 import Signup from "../Pages/signup";
@@ -37,7 +37,7 @@ function App() {
               <Signup />
             </Route>
             <Route path="/">
-              <Home />
+              <Main />
             </Route>
           </Switch>
         </div>

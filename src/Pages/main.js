@@ -1,9 +1,9 @@
 import React from "react";
 import Home from "./home";
-import Login from "./login";
+import Dashboard from "./dashboard";
 
 function Main({ auth }) {
-  return !auth.isEmpty ? <Home /> : <Login />;
+  return !auth.isEmpty ? <Home /> : <Dashboardzxs />;
 };
 
 function mapStateToProps(state) {
