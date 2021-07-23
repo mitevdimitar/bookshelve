@@ -13,6 +13,7 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 
 import firebase from "./services/firebase";
 import 'firebase/auth';
+import 'firebase/database';
 
 // react-redux-firebase config
 const rrfConfig = {
