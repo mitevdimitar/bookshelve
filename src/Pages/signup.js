@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LoginImg from '../img/login.jpg';
 import { useHistory } from "react-router-dom";
 import { signup } from "../services/auth";
+import { connect } from "react-redux";
 
 function Copyright() {
   return (
@@ -61,7 +62,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Signup() {
+function Signup({
+  auth,
+  dispatch
+}) {
+  console.log(auth)
+  console.log(dispatch)
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); 
@@ -77,7 +83,8 @@ function Signup() {
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    await signup(email, password);
+    const response = await signup(email, password);
+    console.log(response)
     history.push('/');
   }
 
@@ -179,4 +186,15 @@ function Signup() {
   );
 }
 
-export default Signup;
+function mapStateToProps(state) {
+  return {
+    firebase: state.firebase.auth,
+    auth: state.auth
+  };
+}
+
+const mapDispatchToProps = dispatch => ({
+  dispatch
+ })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

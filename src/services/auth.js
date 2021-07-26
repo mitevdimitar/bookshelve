@@ -3,13 +3,12 @@ import firebase from "./firebase";
 
 // Signing up with Firebase
 export const signup = async (email, password) => {
-  console.log(email, password)
   try {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(data => {
-        console.log(data)
+        return data
         /* dispatch({
           type: SIGNUP_SUCCESS,
           payload:
@@ -17,7 +16,7 @@ export const signup = async (email, password) => {
         }); */
       })
   } catch (err) {
-    console.log(err)
+    return err
     /* dispatch({
       type: SIGNUP_ERROR,
       payload:
