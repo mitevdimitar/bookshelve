@@ -17,6 +17,7 @@ import LoginImg from '../img/login.jpg';
 import { useHistory } from "react-router-dom";
 import { signup } from "../services/auth";
 import { connect } from "react-redux";
+import Notification from '../Components/notification';
 
 function Copyright() {
   return (
@@ -86,6 +87,10 @@ function Signup({
     const response = await signup(email, password);
     console.log(response)
     history.push('/');
+  }
+
+  const onNotificationClose = () => {
+    console.log('notification closed')
   }
 
   return (
@@ -169,6 +174,12 @@ function Signup({
           >
             Sign Up
           </Button>
+          <Notification 
+            open={true} 
+            handleClose={onNotificationClose}
+            severity='error'
+            message="sign up error"
+          />
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
