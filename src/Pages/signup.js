@@ -18,6 +18,7 @@ import { useHistory } from "react-router-dom";
 import { signup } from "../services/auth";
 import { connect } from "react-redux";
 import Notification from '../Components/notification';
+import { SIGN_SUCCESS } from '../store/actions/action_types';
 
 function Copyright() {
   return (
@@ -67,12 +68,11 @@ function Signup({
   auth,
   dispatch
 }) {
-  console.log(auth)
-  console.log(dispatch)
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); 
   let history = useHistory();
+  const { signError, message } = auth;
 
   const onEnterEmail = (e) => {
     setEmail(e.target.value);
@@ -84,13 +84,17 @@ function Signup({
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const response = await signup(email, password);
-    console.log(response)
-    history.push('/');
+    const response = await signup(email, password, dispatch);
+    if (response) {
+      history.push('/');
+    }
   }
 
   const onNotificationClose = () => {
-    console.log('notification closed')
+    dispatch({
+      type: SIGN_SUCCESS,
+      data: ""
+    });
   }
 
   return (
@@ -175,10 +179,10 @@ function Signup({
             Sign Up
           </Button>
           <Notification 
-            open={true} 
+            open={signError} 
             handleClose={onNotificationClose}
             severity='error'
-            message="sign up error"
+            message={message}
           />
           <Grid container justify="flex-end">
             <Grid item>

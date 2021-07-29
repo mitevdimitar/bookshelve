@@ -1,7 +1,7 @@
 import { SIGN_SUCCESS, SIGN_ERROR } from "../actions/action_types";
 
 const initialState = {
-    hasSigned: false,
+    signError: false,
     message: "",
   };
   
@@ -10,12 +10,12 @@ const authReducer = (state = Object.assign({}, initialState), action) => {
     switch (type) {
         case SIGN_SUCCESS:
         return Object.assign({}, state, {
-            hasSigned: true,
+            signError: false,
             message: data
         });
         case SIGN_ERROR:
         return Object.assign({}, state, {
-            hasSigned: false,
+            signError: true,
             message: data
         });
         default:
