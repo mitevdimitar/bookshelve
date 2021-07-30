@@ -71,6 +71,8 @@ function Signup({
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState(""); 
   let history = useHistory();
   const { signError, message } = auth;
 
@@ -82,9 +84,17 @@ function Signup({
     setPassword(e.target.value);
   }
 
+  const onEnterFirstName = (e) => {
+    setFirstName(e.target.value);
+  }
+
+  const onEnterLastName = (e) => {
+    setLastName(e.target.value);
+  }
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const response = await signup(email, password, dispatch);
+    const response = await signup(email, password, firstName, lastName, dispatch);
     if (response) {
       history.push('/');
     }
@@ -111,7 +121,7 @@ function Signup({
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -121,6 +131,8 @@ function Signup({
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={onEnterFirstName}
+                value={firstName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -132,8 +144,10 @@ function Signup({
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={onEnterLastName}
+                value={lastName}
               />
-            </Grid> */}
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -202,6 +216,7 @@ function Signup({
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     firebase: state.firebase.auth,
     auth: state.auth

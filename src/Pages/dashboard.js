@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import firebase from "../services/firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -9,10 +10,11 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Dashboard() {
+    const user = firebase.auth().currentUser;
     const classes = useStyles();
     return (
         <Grid container className={classes.root}>
-            Dashboard
+            Welcome, {user.displayName}!
         </Grid>
     )
 }

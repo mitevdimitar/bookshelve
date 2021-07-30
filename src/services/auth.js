@@ -2,11 +2,17 @@ import { SIGN_ERROR, SIGN_SUCCESS } from "../store/actions/action_types";
 import firebase from "./firebase";
 
 // Signing up with Firebase
-export const signup = async (email, password, dispatch) => {
+export const signup = async (email, password, firstName, lastName, dispatch) => {
   try {
-    await firebase
+    const response = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password);
+
+    const user = response.user;
+    user.updateProfile({
+      displayName: `${firstName} ${lastName}`
+    })
+
     dispatch({
       type: SIGN_SUCCESS,
       data: "Succesfully logged in!"
