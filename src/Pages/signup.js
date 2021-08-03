@@ -19,6 +19,7 @@ import { signup } from "../services/auth";
 import { connect } from "react-redux";
 import Notification from '../Components/notification';
 import { SIGN_SUCCESS } from '../store/actions/action_types';
+import { mapStateToProps } from '../services/redux';
 
 function Copyright() {
   return (
@@ -73,7 +74,7 @@ function Signup({
   const [password, setPassword] = useState(""); 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState(""); 
-  let history = useHistory();
+  const history = useHistory();
   const { signError, message } = auth;
 
   const onEnterEmail = (e) => {
@@ -213,14 +214,6 @@ function Signup({
       </Grid>
     </Grid>
   );
-}
-
-function mapStateToProps(state) {
-  console.log(state)
-  return {
-    firebase: state.firebase.auth,
-    auth: state.auth
-  };
 }
 
 const mapDispatchToProps = dispatch => ({

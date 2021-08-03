@@ -14,7 +14,7 @@ function Dashboard() {
     const classes = useStyles();
     return (
         <Grid container className={classes.root}>
-            Welcome, {user.displayName}!
+          {user && `Welcome, ${user.displayName}!`}
         </Grid>
     )
 }

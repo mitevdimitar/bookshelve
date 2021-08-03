@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
+import { signout } from '../services/auth';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,8 +21,19 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function MenuBar() {
+function MenuBar({
+    firebase
+}) {
     const classes = useStyles();
+    const history = useHistory();
+
+    const onLogoutClick = async () => {
+        const response = await signout();
+        if (response.success) {
+            history.push('/');
+        }
+    }
+
     return (
         <AppBar position="static" className={classes.root}>
             <Toolbar className={classes.appBar}>
@@ -32,9 +47,17 @@ function MenuBar() {
                         </Typography>
                     </Grid>
                     <Grid container item xs={4} justify="flex-end">
-                        <Button href="/login" color="inherit">
-                            Login
-                        </Button>
+                    {
+                        firebase.isEmpty ? (
+                            <Button href="/login" color="inherit">
+                                Login
+                            </Button>
+                        ) : (
+                            <Button onClick={()=>onLogoutClick()} color="inherit">
+                                Logout
+                            </Button>
+                        )
+                    }
                     </Grid>
                 </Grid>
             </Toolbar>
@@ -42,4 +65,4 @@ function MenuBar() {
     )
 }
 
-export default MenuBar;
+export default connect(mapStateToProps)(MenuBar);

@@ -41,3 +41,22 @@ export const signin = (email, password, callback) => {
     /* dispatch({ type: SIGNIN_ERROR, payload: "Invalid login credentials" }); */
   }
 };
+
+//Signing out from Firebase
+export const signout = () => {
+  try {
+    return firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        return {
+          success: true
+        }
+      })
+  } catch (err) {
+    return {
+      success: false,
+      message: err.message
+    }
+  }
+};

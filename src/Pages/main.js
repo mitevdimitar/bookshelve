@@ -2,15 +2,10 @@ import React from "react";
 import Home from "./home";
 import Dashboard from "./dashboard";
 import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
 
-function Main({ auth }) {
-  return auth.isEmpty ? <Home /> : <Dashboard />;
+function Main({ firebase }) {
+  return firebase.isEmpty ? <Home /> : <Dashboard />;
 };
-
-function mapStateToProps(state) {
-  return {
-    auth: state.firebase.auth
-  };
-}
 
 export default connect(mapStateToProps)(Main);
