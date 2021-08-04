@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginImg from '../img/login.jpg';
+import { signin } from "../services/auth";
+import Notification from '../Components/notification';
+import { mapStateToProps } from '../services/redux';
+import { SIGN_SUCCESS } from '../store/actions/action_types';
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -65,8 +71,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+function Login({
+  auth,
+  dispatch
+}) {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState(""); 
+  const { signError, message } = auth;
+  const history = useHistory();
+
+  const onEnterEmail = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const onEnterPass = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
+    const response = await signin(email, password, dispatch);
+    if (response.user) {
+      history.push('/');
+    }
+  }
+
+  const onNotificationClose = () => {
+    dispatch({
+      type: SIGN_SUCCESS,
+      data: ""
+    });
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -98,6 +134,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={onEnterEmail}
+              value={email}
             />
             <TextField
               variant="outlined"
@@ -109,6 +147,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={onEnterPass}
+              value={password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -120,9 +160,16 @@ export default function Login() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={onFormSubmit}
             >
               Sign In
             </Button>
+            <Notification 
+              open={signError} 
+              handleClose={onNotificationClose}
+              severity='error'
+              message={message}
+            />
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -144,3 +191,9 @@ export default function Login() {
     </Grid>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

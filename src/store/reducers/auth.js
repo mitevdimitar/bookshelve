@@ -9,17 +9,17 @@ const authReducer = (state = Object.assign({}, initialState), action) => {
     const { type, data } = action;
     switch (type) {
         case SIGN_SUCCESS:
-        return Object.assign({}, state, {
-            signError: false,
-            message: data
-        });
+            return Object.assign({}, state, {
+                signError: false,
+                message: data
+            });
         case SIGN_ERROR:
-        return Object.assign({}, state, {
-            signError: true,
-            message: data
-        });
+            return Object.assign({}, state, {
+                signError: true,
+                message: data
+            });
         default:
-        return state;
+            return state;
     }
 };
 

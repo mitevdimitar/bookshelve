@@ -27,19 +27,24 @@ export const signup = async (email, password, firstName, lastName, dispatch) => 
 };
 
 // Signing in with Firebase
-export const signin = (email, password, callback) => {
-  try {
-    firebase
+export const signin = (email, password, dispatch) => {
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        //dispatch({ type: SIGNIN_SUCCESS });
-        callback();
+      .then((user) => {
+        dispatch({
+          type: SIGN_SUCCESS,
+          data: "Succesfully logged in!"
+        });
+        return user;
       })
-  } catch (err) {
-    console.log(err)
-    /* dispatch({ type: SIGNIN_ERROR, payload: "Invalid login credentials" }); */
-  }
+      .catch(err=>{
+        dispatch({
+          type: SIGN_ERROR,
+          data: err.message
+        });
+        return err.message;
+      })
 };
 
 //Signing out from Firebase
