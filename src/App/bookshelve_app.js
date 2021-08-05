@@ -7,6 +7,7 @@ import Main from "../Pages/main";
 import Login from "../Pages/login";
 import MenuBar from "../Components/menu_bar";
 import Signup from "../Pages/signup";
+import MyBooks from "../Pages/my_books";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from '@material-ui/core/colors/green';
 
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/signup">
               <Signup />
+            </Route>
+            <Route path="/my-books">
+              <MyBooks />
             </Route>
             <Route path="/">
               <Main />

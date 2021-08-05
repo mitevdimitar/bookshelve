@@ -53,9 +53,14 @@ function MenuBar({
                                 Login
                             </Button>
                         ) : (
-                            <Button onClick={()=>onLogoutClick()} color="inherit">
-                                Logout
-                            </Button>
+                            <>
+                                <Button href="/my-books" color="inherit">
+                                    My books
+                                </Button>
+                                <Button onClick={()=>onLogoutClick()} color="inherit">
+                                    Logout
+                                </Button>
+                            </>
                         )
                     }
                     </Grid>
