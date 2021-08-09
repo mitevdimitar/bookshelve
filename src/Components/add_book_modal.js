@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,14 +24,21 @@ const useStyles = makeStyles((theme) => ({
         //padding: theme.spacing(3),
     },
     header: {
-        height: 50,
+        height: "10%",
         backgroundColor: theme.palette.primary.main,
         color: "white",
         paddingLeft: 20
     },
     closeIcon: {
         cursor: "pointer"
-    }
+    },
+    body: {
+        height: "80%",
+        padding: "15px 25px"
+    },
+    footer: {
+        height: "10%"
+    },
 }));
 
 function AddBookModal({
@@ -34,6 +46,21 @@ function AddBookModal({
     handleClose,
 }) {
     const classes = useStyles();
+    const [author, setAuthor] = useState("");
+    const [title, setTitle] = useState("");
+    const [nationality, setNationality] = useState("");
+
+    const onEnterAuthor = (e) => {
+        setAuthor(e.target.value);
+    }
+
+    const onEnterTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const onNationalityChange = (e) => {
+        setNationality(e.target.value);
+    }
 
     return (
         <Modal
@@ -53,10 +80,52 @@ function AddBookModal({
                         <HighlightOffIcon className={classes.closeIcon} onClick={()=>handleClose()} />
                     </Grid>
                 </Grid>
-                <Grid container>
-                    Body
+                <Grid container className={classes.body}>
+                    <Grid item xs={12}>
+                        <TextField
+                            autoComplete="author"
+                            name="author"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="author"
+                            label="Author"
+                            onChange={onEnterAuthor}
+                            value={author}
+                            placeholder="e.g. Stephen King"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            autoComplete="title"
+                            name="title"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="title"
+                            label="Book title"
+                            onChange={onEnterTitle}
+                            value={title}
+                            placeholder="e.g. The dark tower"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" style={{width: "100%"}}>
+                            <InputLabel id="nationality-label">Nationality</InputLabel>
+                            <Select
+                                labelId="nationality-label"
+                                id="nationality-id"
+                                value={nationality}
+                                onChange={onNationalityChange}
+                                label="Nationality"
+                            >
+                                <MenuItem value={"Bulgarian"}>Bulgarian</MenuItem>
+                                <MenuItem value={"English"}>English</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container className={classes.footer}>
                     Footer
                 </Grid>
             </Grid>
