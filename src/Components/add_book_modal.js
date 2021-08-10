@@ -49,6 +49,9 @@ function AddBookModal({
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [nationality, setNationality] = useState("");
+    const [genre, setGenre] = useState("");
+    const [code, setCode] = useState("");
+    const [link, setLink] = useState("");
 
     const onEnterAuthor = (e) => {
         setAuthor(e.target.value);
@@ -60,6 +63,18 @@ function AddBookModal({
 
     const onNationalityChange = (e) => {
         setNationality(e.target.value);
+    }
+
+    const onGenreChange = (e) => {
+        setGenre(e.target.value);
+    }
+
+    const onEnterCode = (e) => {
+        setCode(e.target.value);
+    }
+
+    const onEnterLink = (e) => {
+        setLink(e.target.value);
     }
 
     return (
@@ -123,6 +138,49 @@ function AddBookModal({
                                 <MenuItem value={"English"}>English</MenuItem>
                             </Select>
                         </FormControl>
+                    </Grid>
+                    <Grid container item justify="space-between">
+                        <Grid item xs={7}>
+                            <FormControl variant="outlined" style={{width: "100%"}}>
+                                <InputLabel id="genre-label">Genre</InputLabel>
+                                <Select
+                                    labelId="genre-label"
+                                    id="genre-id"
+                                    value={genre}
+                                    onChange={onGenreChange}
+                                    label="Genre"
+                                >
+                                    <MenuItem value={"Horror"}>Horror</MenuItem>
+                                    <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <TextField
+                                autoComplete="code"
+                                name="code"
+                                variant="outlined"
+                                fullWidth
+                                id="code"
+                                label="Book code"
+                                onChange={onEnterCode}
+                                value={code}
+                                placeholder="Code for book recognition"
+                            />
+                        </Grid>         
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            autoComplete="goodreads-link"
+                            name="goodreads-link"
+                            variant="outlined"
+                            fullWidth
+                            id="goodreads-link"
+                            label="Goodreads link"
+                            onChange={onEnterLink}
+                            value={link}
+                            placeholder="e.g. https://www.goodreads.com/book/show/43615.The_Gunslinger"
+                        />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.footer}>
