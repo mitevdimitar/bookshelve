@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { addBook } from '../services/books';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -82,8 +83,16 @@ function AddBookModal({
         setLink(e.target.value);
     }
 
-    const onAddBook = () => {
-        console.log('book added')
+    const onAddBook = async () => {
+        const book = {
+            author,
+            title,
+            nationality,
+            genre,
+            code,
+            link
+        }
+        await addBook(book);
     }
 
     return (
