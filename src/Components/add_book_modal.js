@@ -93,6 +93,7 @@ function AddBookModal({
             link
         }
         await addBook(book);
+        handleClose();
     }
 
     return (

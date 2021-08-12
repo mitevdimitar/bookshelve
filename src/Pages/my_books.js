@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AddBookModal from "../Components/add_book_modal";
+import { getBooks } from "../services/books";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,6 +19,15 @@ const useStyles = makeStyles((theme) => ({
 function MyBooks() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+
+    const getAllBooks = useCallback(async () => {   
+        const books = await getBooks();
+        console.log(books)
+    }, []);
+    
+    useEffect(()=>{
+        getAllBooks();
+    }, [getAllBooks]);
 
     const openAddBookModal = () => {
         setOpen(true);
