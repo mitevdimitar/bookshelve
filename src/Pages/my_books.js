@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,16 +13,31 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: 20
     },
+    row: {
+        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: 7,
+        margin: "2.5%",
+        padding: 10,
+        width: "95%",
+        boxShadow: `0 1px 1px rgba(${theme.palette.primary.main} / 0.2)`,
+        cursor: "pointer",
+        "&:hover": {
+            background: "#FBF7F7"
+        }
+    }
 }));
   
 
 function MyBooks() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [books, setBooks] = useState([]);
 
     const getAllBooks = useCallback(async () => {   
-        const books = await getBooks();
-        console.log(books)
+        const response = await getBooks();
+        if (response.data) {
+            setBooks(Object.values(response.data));
+        }
     }, []);
     
     useEffect(()=>{
@@ -52,9 +67,18 @@ function MyBooks() {
                     Add book
                 </Button>
             </Grid>
-            <Grid>
-                My books
-            </Grid>
+            <>
+                {books.map((book, i)=>{
+                    console.log(book)
+                    return (
+                        <Grid container className={classes.row} key={i}>
+                            <Grid container item>
+                                {book.author}
+                            </Grid>
+                        </Grid>
+                    )
+                })}
+            </>
         </Grid>
     )
 }
