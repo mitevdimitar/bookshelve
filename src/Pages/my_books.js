@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AddBookModal from "../Components/add_book_modal";
 import { getBooks } from "../services/books";
+import BookAvatar from '../img/book_avatar.jpg';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             background: "#FBF7F7"
         }
+    },
+    avatar: {
+        width: 30,
+        height: 30,
+        paddingLeft: 10
     }
 }));
   
@@ -72,8 +79,20 @@ function MyBooks() {
                     console.log(book)
                     return (
                         <Grid container className={classes.row} key={i}>
-                            <Grid container item>
+                            <Grid container item xs={1}>
+                                <Avatar className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
+                            </Grid>
+                            <Grid container alignItems="center" item xs={3}>
                                 {book.author}
+                            </Grid>
+                            <Grid container alignItems="center" item xs={4}>
+                                {book.title}
+                            </Grid>
+                            <Grid container alignItems="center" item xs={2}>
+                                {book.genre}
+                            </Grid>
+                            <Grid container alignItems="center" item xs={2}>
+                                Buttons
                             </Grid>
                         </Grid>
                     )
