@@ -18,14 +18,21 @@ const useStyles = makeStyles((theme) => ({
     row: {
         border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: 7,
-        margin: "2.5%",
+        margin: "0 2.5% 1% 2.5%",
         padding: 10,
         width: "95%",
         boxShadow: `0 1px 1px rgba(${theme.palette.primary.main} / 0.2)`,
-        cursor: "pointer",
+        //cursor: "pointer",
         "&:hover": {
             background: "#FBF7F7"
         }
+    },
+    headerRow: {
+        margin: "0 2.5%",
+        padding: 10,
+        width: "95%",
+        fontWeight: 600,
+        fontStyle: "oblique"
     },
     avatar: {
         width: 30,
@@ -73,6 +80,21 @@ function MyBooks() {
                 >
                     Add book
                 </Button>
+            </Grid>
+            <Grid container className={classes.headerRow}>
+                <Grid container item xs={1}>
+                </Grid>
+                <Grid container alignItems="center" item xs={3}>
+                    Author
+                </Grid>
+                <Grid container alignItems="center" item xs={4}>
+                    Title
+                </Grid>
+                <Grid container alignItems="center" item xs={2}>
+                    Genre
+                </Grid>
+                <Grid container alignItems="center" item xs={2}>
+                </Grid>
             </Grid>
             <>
                 {books.map((book, i)=>{
