@@ -4,8 +4,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AddBookModal from "../Components/add_book_modal";
 import { getBooks } from "../services/books";
-import BookAvatar from '../img/book_avatar.jpg';
-import Avatar from '@material-ui/core/Avatar';
+import BookRow from "../Components/book_row";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,18 +14,6 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: 20
     },
-    row: {
-        border: `1px solid ${theme.palette.primary.main}`,
-        borderRadius: 7,
-        margin: "0 2.5% 1% 2.5%",
-        padding: 10,
-        width: "95%",
-        boxShadow: `0 1px 1px rgba(${theme.palette.primary.main} / 0.2)`,
-        //cursor: "pointer",
-        "&:hover": {
-            background: "#FBF7F7"
-        }
-    },
     headerRow: {
         margin: "0 2.5%",
         padding: 10,
@@ -34,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 600,
         fontStyle: "oblique"
     },
-    avatar: {
-        width: 30,
-        height: 30,
-        paddingLeft: 10
-    }
 }));
   
 
@@ -100,23 +82,7 @@ function MyBooks() {
                 {books.map((book, i)=>{
                     console.log(book)
                     return (
-                        <Grid container className={classes.row} key={i}>
-                            <Grid container item xs={1}>
-                                <Avatar className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
-                            </Grid>
-                            <Grid container alignItems="center" item xs={3}>
-                                {book.author}
-                            </Grid>
-                            <Grid container alignItems="center" item xs={4}>
-                                {book.title}
-                            </Grid>
-                            <Grid container alignItems="center" item xs={2}>
-                                {book.genre}
-                            </Grid>
-                            <Grid container alignItems="center" item xs={2}>
-                                Buttons
-                            </Grid>
-                        </Grid>
+                        <BookRow key={i} book={book} i={i}/>
                     )
                 })}
             </>
