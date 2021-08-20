@@ -1,8 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BookAvatar from '../img/book_avatar.jpg';
+import GoodreadsAvatar from '../img/goodreads.png';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from "@material-ui/core/Grid";
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -19,8 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         width: 30,
-        height: 30,
-        paddingLeft: 10
+        height: 30
     }
 }));
 
@@ -32,8 +35,8 @@ function BookRow({
 
     return (
         <Grid container className={classes.row}>
-            <Grid container item xs={1}>
-                <Avatar className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
+            <Grid container alignItems="center"  item xs={1}>
+                <Avatar style={{paddingLeft: 10}} className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
             </Grid>
             <Grid container alignItems="center" item xs={3}>
                 {book.author}
@@ -44,8 +47,18 @@ function BookRow({
             <Grid container alignItems="center" item xs={2}>
                 {book.genre}
             </Grid>
-            <Grid container alignItems="center" item xs={2}>
-                Buttons
+            <Grid container alignItems="center" justify="flex-end" item xs={2}>
+                {book.link && (
+                    <IconButton onClick={() => window.open(book.link, "_blank")}>
+                        <Avatar className={classes.avatar} alt="goodreads logo" src={GoodreadsAvatar} />
+                    </IconButton>
+                )}
+                <IconButton color="primary">
+                    <EditIcon />
+                </IconButton>
+                <IconButton>
+                    <DeleteIcon color="primary"/>
+                </IconButton>
             </Grid>
         </Grid>
     )
