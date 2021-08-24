@@ -10,7 +10,7 @@ if (selectedLang) {
   defaultLang = selectedLang;
 }
 
-let customTranslations = localStorage.getItem("customTranslations");
+/* let customTranslations = localStorage.getItem("customTranslations");
 
 if (customTranslations) {
   customTranslations = JSON.parse(customTranslations);
@@ -25,7 +25,7 @@ if (customTranslations) {
       }
     }
   }
-}
+} */
 
 i18n.use(LanguageDetector).init({
   lng: defaultLang,
