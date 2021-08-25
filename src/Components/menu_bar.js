@@ -13,6 +13,8 @@ import { signout } from '../services/auth';
 import { useHistory } from "react-router-dom";
 import EngFlag from '../img/eng.png';
 import BgFlag from '../img/bg.png';
+import { SET_LANGUAGE } from '../store/actions/action_types';
+import i18n from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,9 +38,10 @@ const useStyles = makeStyles((theme) => ({
 
 function MenuBar({
     firebase,
-    settings
+    settings,
+    dispatch
 }) {
-    //const { lang } = settings;
+    const { lang } = settings;
     const classes = useStyles();
     const history = useHistory();
     const [editLangMode, setEditLangMode] = useState(false);
@@ -52,6 +55,15 @@ function MenuBar({
 
     const onFlagClick = () => {
         setEditLangMode(!editLangMode)
+    }
+
+    const setLanguage = () => {
+        dispatch({
+            type: SET_LANGUAGE,
+            data: lang === 'en' ? 'bg' : 'en'
+        });
+        setEditLangMode(false);
+       // localStorage.setItem("lang", lang === 'en' ? 'bg' : 'en');
     }
 
     return (
@@ -78,18 +90,18 @@ function MenuBar({
                                     My books
                                 </Button>
                                 <Button onClick={()=>onLogoutClick()} color="inherit">
-                                    Logout
+                                    {i18n.t("default:_LOGOUT")}
                                 </Button>
                             </>
                         )
                     }
                     <Grid className={classes.flagContainer} item>
                         <Grid className={classes.mainFlag}>
-                            <img style={{height: 14}} src={EngFlag} alt="British flag" onClick={onFlagClick}/>
+                            <img style={{height: 14}} src={lang === 'en' ? EngFlag : BgFlag} alt="British flag" onClick={onFlagClick}/>
                         </Grid>
                         {editLangMode && (
-                            <Grid className={classes.secondFlag}>
-                                <img style={{height: 14}} src={BgFlag} alt="Bulgarian flag"/>
+                            <Grid className={classes.secondFlag} onClick={()=>setLanguage()}>
+                                <img style={{height: 14}} src={lang === 'en' ? BgFlag : EngFlag} alt="Bulgarian flag"/>
                             </Grid>
                         )}
                     </Grid>
@@ -100,4 +112,8 @@ function MenuBar({
     )
 }
 
-export default connect(mapStateToProps)(MenuBar);
+const mapDispatchToProps = dispatch => ({
+    dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);

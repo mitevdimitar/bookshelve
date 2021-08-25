@@ -10,6 +10,8 @@ if (selectedLang) {
   defaultLang = selectedLang;
 }
 
+console.log(defaultLang)
+
 /* let customTranslations = localStorage.getItem("customTranslations");
 
 if (customTranslations) {
@@ -32,7 +34,7 @@ i18n.use(LanguageDetector).init({
   // we init with resources
   resources: {
     en: en,
-    he: he,
+    bg: bg,
   },
   fallbackLng: "en",
   debug: true,

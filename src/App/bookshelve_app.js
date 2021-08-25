@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,6 +11,8 @@ import Signup from "../Pages/signup";
 import MyBooks from "../Pages/my_books";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from '@material-ui/core/colors/green';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,7 +25,17 @@ const theme = createMuiTheme({
   },
 });
 
-function App() {
+function App({
+  settings
+}) {
+  const { lang } = settings;
+  console.log(lang)
+
+  useEffect(()=>{
+    localStorage.setItem("i18nextLng", lang);
+    
+  }, [lang]);
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -50,4 +63,8 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  dispatch
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
