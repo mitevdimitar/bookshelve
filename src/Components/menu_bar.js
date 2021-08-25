@@ -35,8 +35,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function MenuBar({
-    firebase
+    firebase,
+    settings
 }) {
+    //const { lang } = settings;
     const classes = useStyles();
     const history = useHistory();
     const [editLangMode, setEditLangMode] = useState(false);
