@@ -1,5 +1,6 @@
 import { SIGN_ERROR, SIGN_SUCCESS } from "../store/actions/action_types";
 import firebase from "./firebase";
+const axios = require('axios');
 
 // Signing up with Firebase
 export const signup = async (email, password, firstName, lastName, dispatch) => {
@@ -11,13 +12,13 @@ export const signup = async (email, password, firstName, lastName, dispatch) => 
     const user = response.user;
     user.updateProfile({
       displayName: `${firstName} ${lastName}`
-    })
+    });
 
     dispatch({
       type: SIGN_SUCCESS,
       data: "Succesfully logged in!"
     });
-    return true;
+    return user;
   } catch(err) {
     dispatch({
       type: SIGN_ERROR,
@@ -65,3 +66,17 @@ export const signout = () => {
     }
   }
 };
+
+export const createInitialDB = async (id) => {
+  await axios.post(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}.json`, {
+      settings: {
+        lang: 'en'
+      }
+    })
+    .then(function (response) {
+      console.log(response.statusText);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}

@@ -32,8 +32,7 @@ function App({
   console.log(lang)
 
   useEffect(()=>{
-    localStorage.setItem("i18nextLng", lang);
-    
+    localStorage.setItem("lang", lang);
   }, [lang]);
 
   return (

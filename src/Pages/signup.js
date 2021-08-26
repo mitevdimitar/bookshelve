@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginImg from '../img/login.jpg';
 import { useHistory } from "react-router-dom";
-import { signup } from "../services/auth";
+import { createInitialDB, signup } from "../services/auth";
 import { connect } from "react-redux";
 import Notification from '../Components/notification';
 import { SIGN_SUCCESS } from '../store/actions/action_types';
@@ -97,6 +97,8 @@ function Signup({
     e.preventDefault();
     const response = await signup(email, password, firstName, lastName, dispatch);
     if (response) {
+      const id = response.uid;
+      await createInitialDB(id);
       history.push('/');
     }
   }
