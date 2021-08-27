@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import green from '@material-ui/core/colors/green';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
+import { getSettings } from '../services/settings';
+import { SET_LANGUAGE } from '../store/actions/action_types';
 
 const theme = createMuiTheme({
   palette: {
@@ -26,14 +28,30 @@ const theme = createMuiTheme({
 });
 
 function App({
-  settings
+  settings,
+  firebase,
+  dispatch
 }) {
   const { lang } = settings;
-  console.log(lang)
+
+  const setSettings = useCallback(async () => {
+    const id = firebase.uid;
+    const response = await getSettings(id);
+    if (response.data) {
+      const { lang } = response.data.settings;
+      dispatch({
+        type: SET_LANGUAGE,
+        data: lang
+    });
+    }
+  }, [firebase.uid, dispatch])
 
   useEffect(()=>{
     localStorage.setItem("lang", lang);
-  }, [lang]);
+    if (!firebase.isEmpty) {
+      setSettings();
+    }
+  }, [lang, setSettings, firebase.isEmpty]);
 
   return (
     <ThemeProvider theme={theme}>
