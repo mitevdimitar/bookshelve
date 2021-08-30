@@ -6,6 +6,7 @@ import * as bg from "./languages/bg.json";
 let defaultLang = "en";
 
 const selectedLang = localStorage.getItem("lang");
+console.log(selectedLang)
 if (selectedLang) {
   defaultLang = selectedLang;
 }

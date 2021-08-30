@@ -13,8 +13,9 @@ import { signout } from '../services/auth';
 import { useHistory } from "react-router-dom";
 import EngFlag from '../img/eng.png';
 import BgFlag from '../img/bg.png';
-import { SET_LANGUAGE } from '../store/actions/action_types';
+//import { SET_LANGUAGE } from '../store/actions/action_types';
 import i18n from '../i18n';
+import { updateSettings } from '../services/settings';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 function MenuBar({
     firebase,
     settings,
-    dispatch
+    //dispatch
 }) {
     const { lang } = settings;
     const classes = useStyles();
@@ -57,13 +58,19 @@ function MenuBar({
         setEditLangMode(!editLangMode)
     }
 
-    const setLanguage = () => {
-        dispatch({
+    const setLanguage = async () => {
+        /* dispatch({
             type: SET_LANGUAGE,
             data: lang === 'en' ? 'bg' : 'en'
-        });
+        }); */
+        const id = firebase.uid;
+        const data = {
+            lang: lang === 'en' ? 'bg' : 'en'
+        }
+        await updateSettings(id, data);
         setEditLangMode(false);
-       // localStorage.setItem("lang", lang === 'en' ? 'bg' : 'en');
+        localStorage.setItem("lang", data.lang);
+        window.location.reload();
     }
 
     return (
