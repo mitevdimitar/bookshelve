@@ -11,6 +11,8 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { addBook } from '../services/books';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -50,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 function AddBookModal({
     open,
     handleClose,
+    firebase
 }) {
     const classes = useStyles();
     const [author, setAuthor] = useState("");
@@ -92,7 +95,8 @@ function AddBookModal({
             code,
             link
         }
-        await addBook(book);
+        const id = firebase.uid;
+        await addBook(id, book);
         handleClose();
     }
 
@@ -217,4 +221,4 @@ function AddBookModal({
     )
 }
 
-export default AddBookModal;
+export default connect(mapStateToProps)(AddBookModal);

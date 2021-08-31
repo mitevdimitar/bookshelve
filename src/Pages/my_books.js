@@ -80,7 +80,6 @@ function MyBooks() {
             </Grid>
             <>
                 {books.map((book, i)=>{
-                    console.log(book)
                     return (
                         <BookRow key={i} book={book} i={i}/>
                     )
