@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddBookModal from "../Components/add_book_modal";
 import { getBooks } from "../services/books";
 import BookRow from "../Components/book_row";
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,17 +26,20 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-function MyBooks() {
+function MyBooks({
+    firebase
+}) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [books, setBooks] = useState([]);
 
     const getAllBooks = useCallback(async () => {   
-        const response = await getBooks();
+        const id = firebase.uid;
+        const response = await getBooks(id);
         if (response.data) {
             setBooks(Object.values(response.data));
         }
-    }, []);
+    }, [firebase.uid]);
     
     useEffect(()=>{
         getAllBooks();
@@ -63,21 +68,23 @@ function MyBooks() {
                     Add book
                 </Button>
             </Grid>
-            <Grid container className={classes.headerRow}>
-                <Grid container item xs={1}>
+            {books.length > 0 && (
+                <Grid container className={classes.headerRow}>
+                    <Grid container item xs={1}>
+                    </Grid>
+                    <Grid container alignItems="center" item xs={3}>
+                        Author
+                    </Grid>
+                    <Grid container alignItems="center" item xs={4}>
+                        Title
+                    </Grid>
+                    <Grid container alignItems="center" item xs={2}>
+                        Genre
+                    </Grid>
+                    <Grid container alignItems="center" item xs={2}>
+                    </Grid>
                 </Grid>
-                <Grid container alignItems="center" item xs={3}>
-                    Author
-                </Grid>
-                <Grid container alignItems="center" item xs={4}>
-                    Title
-                </Grid>
-                <Grid container alignItems="center" item xs={2}>
-                    Genre
-                </Grid>
-                <Grid container alignItems="center" item xs={2}>
-                </Grid>
-            </Grid>
+            )}
             <>
                 {books.map((book, i)=>{
                     return (
@@ -89,4 +96,4 @@ function MyBooks() {
     )
 }
 
-export default MyBooks;
+export default connect(mapStateToProps)(MyBooks);
