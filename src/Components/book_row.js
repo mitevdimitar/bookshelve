@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { isMobileDevice } from '../services/mobile';
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         width: 30,
         height: 30
+    },
+    iconButton: {
+        padding: isMobileDevice() && 0
     }
 }));
 
@@ -35,10 +39,12 @@ function BookRow({
 
     return (
         <Grid container className={classes.row}>
-            <Grid container alignItems="center"  item xs={1}>
-                <Avatar style={{paddingLeft: 10}} className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
-            </Grid>
-            <Grid container alignItems="center" item xs={3}>
+            {!isMobileDevice() && (
+                <Grid container alignItems="center"  item xs={1}>
+                    <Avatar style={{paddingLeft: 10}} className={classes.avatar} alt={`Book cover ${i}`} src={BookAvatar} />
+                </Grid>
+            )}
+            <Grid container alignItems="center" item xs={4} sm={3}>
                 {book.author}
             </Grid>
             <Grid container alignItems="center" item xs={4}>
@@ -48,16 +54,16 @@ function BookRow({
                 {book.genre}
             </Grid>
             <Grid container alignItems="center" justify="flex-end" item xs={2}>
-                {book.link && (
+                {book.link && !isMobileDevice() && (
                     <IconButton onClick={() => window.open(book.link, "_blank")}>
                         <Avatar className={classes.avatar} alt="goodreads logo" src={GoodreadsAvatar} />
                     </IconButton>
                 )}
-                <IconButton color="primary">
+                <IconButton className={classes.iconButton} color="primary">
                     <EditIcon />
                 </IconButton>
-                <IconButton>
-                    <DeleteIcon color="primary"/>
+                <IconButton className={classes.iconButton}  color="primary">
+                    <DeleteIcon />
                 </IconButton>
             </Grid>
         </Grid>

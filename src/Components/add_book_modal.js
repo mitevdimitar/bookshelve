@@ -13,14 +13,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import { addBook } from '../services/books';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
+import { isMobileDevice } from '../services/mobile';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
-        width: "50%",
+        width: isMobileDevice() ? "99%" : "50%",
         height: 500,
         top: "10%",
-        left: "20%",
+        left: isMobileDevice() ? 0 : "20%",
         backgroundColor: theme.palette.background.paper,
         border: `2px solid ${theme.palette.primary.main}`,
         borderRadius: 10,

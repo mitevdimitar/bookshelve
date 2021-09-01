@@ -70,9 +70,9 @@ function MyBooks({
             </Grid>
             {books.length > 0 && (
                 <Grid container className={classes.headerRow}>
-                    <Grid container item xs={1}>
+                    <Grid container item sm={1}>
                     </Grid>
-                    <Grid container alignItems="center" item xs={3}>
+                    <Grid container alignItems="center" item xs={4} sm={3}>
                         Author
                     </Grid>
                     <Grid container alignItems="center" item xs={4}>
