@@ -21,3 +21,13 @@ export const getBooks = async (id) => {
       console.log(error);
     });
 }
+
+export const getNationalities = async () => {
+  return await axios.get("https://restcountries.eu/rest/v2/all")
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
