@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
@@ -10,10 +10,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { addBook, getNationalities } from '../services/books';
+import { addBook } from '../services/books';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
+import SelectNationalities from './select_nationalities';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -58,20 +59,10 @@ function AddBookModal({
     const classes = useStyles();
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
-    //const [nationalities, setNationalities] = useState([]);
     const [nationality, setNationality] = useState("");
     const [genre, setGenre] = useState("");
     const [code, setCode] = useState("");
     const [link, setLink] = useState("");
-
-    const getNationalitiesList = async () => {
-        const response = await getNationalities();
-        console.log(response)
-    }
-
-    useEffect(()=>{
-        getNationalitiesList();
-    }, [])
 
     const onEnterAuthor = (e) => {
         setAuthor(e.target.value);
@@ -159,19 +150,7 @@ function AddBookModal({
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <FormControl variant="outlined" style={{width: "100%"}}>
-                            <InputLabel id="nationality-label">Nationality</InputLabel>
-                            <Select
-                                labelId="nationality-label"
-                                id="nationality-id"
-                                value={nationality}
-                                onChange={onNationalityChange}
-                                label="Nationality"
-                            >
-                                <MenuItem value={"Bulgarian"}>Bulgarian</MenuItem>
-                                <MenuItem value={"English"}>English</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <SelectNationalities onNationalityChange={onNationalityChange} nationality={nationality} />
                     </Grid>
                     <Grid container item justify="space-between">
                         <Grid item xs={7}>
