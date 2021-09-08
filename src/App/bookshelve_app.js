@@ -33,11 +33,15 @@ function App({
   dispatch
 }) {
   const { lang } = settings;
+  const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+/*   console.log(firebase)
+  console.log(firebase.stsTokenManager && firebase.stsTokenManager.accessToken) */
 
   const setSettings = useCallback(async () => {
     const id = firebase.uid;
-    const response = await getSettings(id);
-    if (response.data) {
+    const response = await getSettings(id, token);
+    console.log(response)
+    if (response && response.data) {
       const { lang } = response.data.settings;
       dispatch({
         type: SET_LANGUAGE,
@@ -45,7 +49,7 @@ function App({
       });
       
     }
-  }, [firebase.uid, dispatch])
+  }, [firebase.uid, dispatch, token])
 
   useEffect(()=>{
     localStorage.setItem("lang", lang);

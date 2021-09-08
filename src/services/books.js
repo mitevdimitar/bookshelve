@@ -12,8 +12,8 @@ export const addBook = async (id, book) => {
       });
 }
 
-export const getBooks = async (id) => {
-  return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books.json?print=pretty`)
+export const getBooks = async (id, token) => {
+  return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books.json?auth=${token}`)
     .then(function (response) {
       return response;
     })

@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup({
   auth,
-  dispatch
+  dispatch,
+  firebase
 }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
@@ -77,6 +78,7 @@ function Signup({
   const [lastName, setLastName] = useState(""); 
   const history = useHistory();
   const { signError, message } = auth;
+  const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
 
   const onEnterEmail = (e) => {
     setEmail(e.target.value);
@@ -99,7 +101,7 @@ function Signup({
     const response = await signup(email, password, firstName, lastName, dispatch);
     if (response) {
       const id = response.uid;
-      await createInitialDB(id);
+      await createInitialDB(id, token);
       history.push('/');
     }
   }

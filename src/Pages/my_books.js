@@ -32,14 +32,15 @@ function MyBooks({
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [books, setBooks] = useState([]);
+    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+    const id = firebase.uid;
 
     const getAllBooks = useCallback(async () => {   
-        const id = firebase.uid;
-        const response = await getBooks(id);
-        if (response.data) {
+        const response = token && await getBooks(id, token);
+        if (response && response.data) {
             setBooks(Object.values(response.data));
         }
-    }, [firebase.uid]);
+    }, [id, token]);
     
     useEffect(()=>{
         getAllBooks();

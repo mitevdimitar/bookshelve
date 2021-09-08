@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-export const createInitialDB = async (id) => {
-    await axios.put(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}.json`, {
+export const createInitialDB = async (id, token) => {
+    await axios.put(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}.json?auth=${token}`, {
         settings: {
           lang: 'en'
         }
@@ -14,8 +14,8 @@ export const createInitialDB = async (id) => {
       });
 }
 
-export const getSettings = async (id) => {
-    return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}.json?print=pretty`)
+export const getSettings = async (id, token) => {
+    return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}.json?auth=${token}`)
       .then(function (response) {
         return response;
       })
