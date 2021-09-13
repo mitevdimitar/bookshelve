@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
 import SelectNationalities from './select_nationalities';
+import { GENRES } from '../services/constants';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -163,8 +164,9 @@ function AddBookModal({
                                     onChange={onGenreChange}
                                     label="Genre"
                                 >
-                                    <MenuItem value={"Horror"}>Horror</MenuItem>
-                                    <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                                    {GENRES.map((genre, i)=>{
+                                        return <MenuItem key={i} value={genre.value}>{genre.name}</MenuItem>
+                                    })}
                                 </Select>
                             </FormControl>
                         </Grid>
