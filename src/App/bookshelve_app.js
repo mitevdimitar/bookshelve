@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Main from "../Pages/main";
 import Login from "../Pages/login";
-import MenuBar from "../Components/menu_bar";
+import MenuBar from "../Components/MenuBar/menu_bar";
 import Signup from "../Pages/signup";
 import MyBooks from "../Pages/my_books";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
