@@ -40,7 +40,6 @@ function App({
   const setSettings = useCallback(async () => {
     const id = firebase.uid;
     const response = await getSettings(id, token);
-    console.log(response)
     if (response && response.data) {
       const { lang } = response.data.settings;
       dispatch({

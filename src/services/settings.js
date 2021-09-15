@@ -24,8 +24,8 @@ export const getSettings = async (id, token) => {
       });
 }
 
-export const updateSettings = async (id, data) => {
-  await axios.patch(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/settings.json`, {
+export const updateSettings = async (id, data, token) => {
+  await axios.patch(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/settings.json?auth=${token}`, {
       ...data
     })
     .then(function (response) {

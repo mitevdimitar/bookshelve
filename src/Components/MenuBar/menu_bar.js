@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,13 +11,10 @@ import { connect } from "react-redux";
 import { mapStateToProps } from '../../services/redux';
 import { signout } from '../../services/auth';
 import { useHistory } from "react-router-dom";
-import EngFlag from '../../img/eng.png';
-import BgFlag from '../../img/bg.png';
-//import { SET_LANGUAGE } from '../store/actions/action_types';
 import i18n from '../../i18n';
-import { updateSettings } from '../../services/settings';
 import { isMobileDevice } from '../../services/mobile';
 import MobileMenu from './mobile_menu';
+import LanguagePanel from "./language_panel";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,53 +23,19 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         minHeight: 54
     },
-    flagContainer: {
-        marginLeft: 10,
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative"
-    },
-    secondFlag: {
-        position: "absolute",
-        top: 18
-    }
-  }));
+}));
 
 function MenuBar({
     firebase,
-    settings,
-    //dispatch
 }) {
-    const { lang } = settings;
     const classes = useStyles();
     const history = useHistory();
-    const [editLangMode, setEditLangMode] = useState(false);
 
     const onLogoutClick = async () => {
         const response = await signout();
         if (response.success) {
             history.push('/');
         }
-    }
-
-    const onFlagClick = () => {
-        setEditLangMode(!editLangMode)
-    }
-
-    const setLanguage = async () => {
-        /* dispatch({
-            type: SET_LANGUAGE,
-            data: lang === 'en' ? 'bg' : 'en'
-        }); */
-        const id = firebase.uid;
-        const data = {
-            lang: lang === 'en' ? 'bg' : 'en'
-        }
-        await updateSettings(id, data);
-        setEditLangMode(false);
-        localStorage.setItem("lang", data.lang);
-        window.location.reload();
     }
 
     return (
@@ -109,15 +72,8 @@ function MenuBar({
                                     )
                                 }
                             </Grid>
-                            <Grid className={classes.flagContainer} item xs={1}>
-                                <Grid className={classes.mainFlag}>
-                                    <img style={{height: 14}} src={lang === 'en' ? EngFlag : BgFlag} alt="British flag" onClick={onFlagClick}/>
-                                </Grid>
-                                {editLangMode && (
-                                    <Grid className={classes.secondFlag} onClick={()=>setLanguage()}>
-                                        <img style={{height: 14}} src={lang === 'en' ? BgFlag : EngFlag} alt="Bulgarian flag"/>
-                                    </Grid>
-                                )}
+                            <Grid item xs={1}>
+                                <LanguagePanel />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -128,8 +84,4 @@ function MenuBar({
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    dispatch
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);
+export default connect(mapStateToProps)(MenuBar);
