@@ -1,8 +1,5 @@
 import React from 'react';
-import HomeIcon from '@material-ui/icons/Home';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import i18n from '../../i18n';
 import LanguagePanel from "./language_panel";
@@ -10,6 +7,7 @@ import { signout } from '../../services/auth';
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../../services/redux';
+import Header from './header';
 
 function DesktopMenu({ firebase }) {
     const history = useHistory();
@@ -23,13 +21,8 @@ function DesktopMenu({ firebase }) {
 
     return (
         <Grid container justify="space-between">
-            <Grid container item xs={6} alignItems="center">        
-                <IconButton href="/" edge="start" color="inherit" aria-label="menu">
-                    <HomeIcon />
-                </IconButton>
-                <Typography variant="h6">
-                    Header
-                </Typography>
+            <Grid container item xs={6} alignItems="center">
+                <Header />
             </Grid>
             <Grid container item xs={6} justify="flex-end" alignItems="center">
                 <Grid container item xs={10} justify="flex-end" alignItems="center">
