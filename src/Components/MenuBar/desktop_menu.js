@@ -1,24 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import i18n from '../../i18n';
 import LanguagePanel from "./language_panel";
-import { signout } from '../../services/auth';
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../../services/redux';
 import Header from './header';
+import LogoutButton from './logout_button';
 
 function DesktopMenu({ firebase }) {
-    const history = useHistory();
-
-    const onLogoutClick = async () => {
-        const response = await signout();
-        if (response.success) {
-            history.push('/');
-        }
-    }
-
     return (
         <Grid container justify="space-between">
             <Grid container item xs={6} alignItems="center">
@@ -36,9 +25,7 @@ function DesktopMenu({ firebase }) {
                                 <Button href="/my-books" color="inherit">
                                     My books
                                 </Button>
-                                <Button onClick={()=>onLogoutClick()} color="inherit">
-                                    {i18n.t("default:_LOGOUT")}
-                                </Button>
+                                <LogoutButton />
                             </>
                         )
                     }
