@@ -100,6 +100,12 @@ function AddBookModal({
         }
         const id = firebase.uid;
         await addBook(id, book);
+        setAuthor("");
+        setTitle("");
+        setNationality("");
+        setGenre("");
+        setCode("");
+        setLink("");
         handleClose();
     }
 
