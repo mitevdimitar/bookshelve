@@ -5,6 +5,7 @@ import LanguagePanel from "./language_panel";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../../services/redux';
 import LogoutButton from './logout_button';
+import i18n from '../../i18n';
 
 function MenuButtons({ firebase }) {
     return (
@@ -13,12 +14,12 @@ function MenuButtons({ firebase }) {
                 {
                     firebase.isEmpty ? (
                         <Button href="/login" color="inherit">
-                            Login
+                            {i18n.t("default:_LOGIN")}
                         </Button>
                     ) : (
                         <>
                             <Button href="/my-books" color="inherit">
-                                My books
+                                {i18n.t("default:_MY_BOOKS")}
                             </Button>
                             <LogoutButton />
                         </>
