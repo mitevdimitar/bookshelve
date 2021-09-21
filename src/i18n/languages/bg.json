@@ -1,5 +1,12 @@
 {
 	"_LOGOUT": "Изход",
 	"_LOGIN": "Вход",
-	"_MY_BOOKS": "Книги"
+	"_MY_BOOKS": "Книги",
+	"_ADD_BOOK": "Добави книга",
+	"_AUTHOR": "Автор",
+	"_BOOK_TITLE": "Заглавие",
+	"_NATIONALITY": "Националност",
+	"_GENRE": "Жанр",
+	"_BOOK_CODE": "Код на книгата",
+	"_GOODREADS_LINK": "Линк в goodreads"
 }

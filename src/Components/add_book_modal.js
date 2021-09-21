@@ -16,6 +16,7 @@ import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
 import SelectNationalities from './select_nationalities';
 import { GENRES } from '../services/constants';
+import i18n from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -120,7 +121,7 @@ function AddBookModal({
                 <Grid container className={classes.header}>
                     <Grid container alignItems="center" item xs={11}>
                         <Typography variant="h6">
-                            Add book
+                            {i18n.t("default:_ADD_BOOK")}
                         </Typography>
                     </Grid>
                     <Grid container alignItems="center" justify="center" item xs={1}>
@@ -136,7 +137,7 @@ function AddBookModal({
                             required
                             fullWidth
                             id="author"
-                            label="Author"
+                            label={i18n.t("default:_AUTHOR")}
                             onChange={onEnterAuthor}
                             value={author}
                             placeholder="e.g. Stephen King"
@@ -150,7 +151,7 @@ function AddBookModal({
                             required
                             fullWidth
                             id="title"
-                            label="Book title"
+                            label={i18n.t("default:_BOOK_TITLE")}
                             onChange={onEnterTitle}
                             value={title}
                             placeholder="e.g. The dark tower"
@@ -162,13 +163,13 @@ function AddBookModal({
                     <Grid container item justify="space-between">
                         <Grid item xs={7}>
                             <FormControl variant="outlined" style={{width: "100%"}}>
-                                <InputLabel id="genre-label">Genre</InputLabel>
+                                <InputLabel id="genre-label">{i18n.t("default:_GENRE")}</InputLabel>
                                 <Select
                                     labelId="genre-label"
                                     id="genre-id"
                                     value={genre}
                                     onChange={onGenreChange}
-                                    label="Genre"
+                                    label={i18n.t("default:_GENRE")}
                                 >
                                     {GENRES.map((genre, i)=>{
                                         return <MenuItem key={i} value={genre.value}>{genre.name}</MenuItem>
@@ -183,7 +184,7 @@ function AddBookModal({
                                 variant="outlined"
                                 fullWidth
                                 id="code"
-                                label="Book code"
+                                label={i18n.t("default:_BOOK_CODE")}
                                 onChange={onEnterCode}
                                 value={code}
                                 placeholder="Code for book recognition"
@@ -197,7 +198,7 @@ function AddBookModal({
                             variant="outlined"
                             fullWidth
                             id="goodreads-link"
-                            label="Goodreads link"
+                            label={i18n.t("default:_GOODREADS_LINK")}
                             onChange={onEnterLink}
                             value={link}
                             placeholder="e.g. https://www.goodreads.com/book/show/43615.The_Gunslinger"

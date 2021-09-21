@@ -7,6 +7,7 @@ import { getBooks } from "../services/books";
 import BookRow from "../Components/book_row";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
+import i18n from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,7 +67,7 @@ function MyBooks({
                     color="primary"
                     onClick={openAddBookModal}
                 >
-                    Add book
+                    {i18n.t("default:_ADD_BOOK")}
                 </Button>
             </Grid>
             {books.length > 0 && (
@@ -74,13 +75,13 @@ function MyBooks({
                     <Grid container item sm={1}>
                     </Grid>
                     <Grid container alignItems="center" item xs={4} sm={3}>
-                        Author
+                        {i18n.t("default:_AUTHOR")}
                     </Grid>
                     <Grid container alignItems="center" item xs={4}>
-                        Title
+                        {i18n.t("default:_BOOK_TITLE")}
                     </Grid>
                     <Grid container alignItems="center" item xs={2}>
-                        Genre
+                        {i18n.t("default:_GENRE")}
                     </Grid>
                     <Grid container alignItems="center" item xs={2}>
                     </Grid>

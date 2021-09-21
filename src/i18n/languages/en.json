@@ -1,5 +1,12 @@
 {
 	"_LOGOUT": "Logout",
 	"_LOGIN": "Login",
-	"_MY_BOOKS": "Books"
+	"_MY_BOOKS": "Books",
+	"_ADD_BOOK": "Add book",
+	"_AUTHOR": "Author",
+	"_BOOK_TITLE": "Book title",
+	"_NATIONALITY": "Nationality",
+	"_GENRE": "Genre",
+	"_BOOK_CODE": "Book code",
+	"_GOODREADS_LINK": "Goodreads link"
 }
