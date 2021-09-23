@@ -59,6 +59,7 @@ function AddBookModal({
     firebase
 }) {
     const classes = useStyles();
+    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [nationality, setNationality] = useState("");
@@ -100,7 +101,7 @@ function AddBookModal({
             link
         }
         const id = firebase.uid;
-        await addBook(id, book);
+        await addBook(id, book, token);
         setAuthor("");
         setTitle("");
         setNationality("");
