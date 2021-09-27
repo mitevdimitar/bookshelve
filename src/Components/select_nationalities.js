@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import i18n from '../i18n';
+import { NATIONALITIES } from "../services/constants";
 
 function SelectNationalities({
     onNationalityChange,
@@ -17,6 +18,8 @@ function SelectNationalities({
         const response = await getNationalities();
         if(response) {
             setNationalities(response.data);
+        } else {
+            setNationalities(NATIONALITIES)
         }
     }
 
@@ -29,9 +32,11 @@ function SelectNationalities({
             return (
                 <MenuItem key={index} value={nationality.name}>
                     <Grid container>
-                        <Grid item>
-                            <img src={nationality.flag} alt={`Flag of ${nationality.name}`} width="20" height="13" />
-                        </Grid>
+                        {nationality.flag && (
+                            <Grid item>
+                                <img src={nationality.flag} alt={`Flag of ${nationality.name}`} width="20" height="13" />
+                            </Grid>
+                        )}
                         <Grid item style={{marginLeft: 10}}>
                             {nationality.name}
                         </Grid>

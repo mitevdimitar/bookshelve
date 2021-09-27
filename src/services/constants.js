@@ -48,3 +48,34 @@ export const GENRES = [
         value: "thriller"
     },
 ]
+
+export const NATIONALITIES = [
+    {
+        name: "Great Britain",
+        value: "gb"
+    },
+    {
+        name: "USA",
+        value: "usa"
+    },
+    {
+        name: "Bulgaria",
+        value: "bg"
+    },
+    {
+        name: "Germany",
+        value: "ger"
+    },
+    {
+        name: "France",
+        value: "fr"
+    },
+    {
+        name: "Russia",
+        value: "rs"
+    },
+    {
+        name: "Other",
+        value: "other"
+    },
+]
