@@ -213,7 +213,7 @@ function AddBookModal({
                         color="primary"
                         onClick={onAddBook}
                     >
-                        Add
+                        {i18n.t("default:_ADD")}
                     </Button>
                 </Grid>
             </Grid>

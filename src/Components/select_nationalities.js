@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import i18n from '../i18n';
 
 function SelectNationalities({
     onNationalityChange,
@@ -42,13 +43,13 @@ function SelectNationalities({
 
     return (
         <FormControl variant="outlined" style={{width: "100%"}}>
-            <InputLabel id="nationality-label">Nationality</InputLabel>
+            <InputLabel id="nationality-label">{i18n.t("default:_NATIONALITY")}</InputLabel>
             <Select
                 labelId="nationality-label"
                 id="nationality-id"
                 value={nationality}
                 onChange={onNationalityChange}
-                label="Nationality"
+                label={i18n.t("default:_NATIONALITY")}
             >
                 {getNationalitiesOptions()}
             </Select>
