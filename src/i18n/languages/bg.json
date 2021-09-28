@@ -9,5 +9,17 @@
 	"_NATIONALITY": "Националност",
 	"_GENRE": "Жанр",
 	"_BOOK_CODE": "Код на книгата",
-	"_GOODREADS_LINK": "Линк в goodreads"
+	"_GOODREADS_LINK": "Линк в goodreads",
+	"_BIOGRAPHY": "Биография",
+	"_CHILDRENS": "Детска литература",
+	"_CRIME": "Крими",
+	"_FANTASY": "Фентъзи",
+	"_HISTORY": "История",
+	"_HORROR": "Ужаси",
+	"_MYSTERY": "Мистерия",
+	"_OTHER": "Друго",
+	"_POETRY": "Поезия",
+	"_ROMANCE": "Романс",
+	"_SCIENCE": "Наука",
+	"_THRILLER": "Трилър"
 }

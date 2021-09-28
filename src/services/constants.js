@@ -1,50 +1,52 @@
+import i18n from '../i18n';
+
 export const GENRES = [
     {
-        name: "Biography",
+        name: i18n.t("default:_BIOGRAPHY"),
         value: "biography"
     },
     {
-        name: "Children's",
+        name: i18n.t("default:_CHILDRENS"),
         value: "childrens"
     },
     {
-        name: "Crime",
+        name: i18n.t("default:_CRIME"),
         value: "crime"
     },
     {
-        name: "Fantasy",
+        name: i18n.t("default:_FANTASY"),
         value: "fantasy"
     },
     {
-        name: "History",
+        name: i18n.t("default:_FANTASY"),
         value: "history"
     },
     {
-        name: "Horror",
+        name: i18n.t("default:_HORROR"),
         value: "horror"
     },
     {
-        name: "Mistery",
+        name: i18n.t("default:_MYSTERY"),
         value: "mistery"
     },
     {
-        name: "Other",
+        name: i18n.t("default:_OTHER"),
         value: "other"
     },
     {
-        name: "Poetry",
+        name: i18n.t("default:_POETRY"),
         value: "poetry"
     },
     {
-        name: "Romance",
+        name: i18n.t("default:_ROMANCE"),
         value: "romance"
     },
     {
-        name: "Science",
+        name: i18n.t("default:_SCIENCE"),
         value: "science"
     },
     {
-        name: "Thriller",
+        name: i18n.t("default:_THRILLER"),
         value: "thriller"
     },
 ]

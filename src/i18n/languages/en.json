@@ -9,5 +9,17 @@
 	"_NATIONALITY": "Nationality",
 	"_GENRE": "Genre",
 	"_BOOK_CODE": "Book code",
-	"_GOODREADS_LINK": "Goodreads link"
+	"_GOODREADS_LINK": "Goodreads link",
+	"_BIOGRAPHY": "Biography",
+	"_CHILDRENS": "Children's",
+	"_CRIME": "Crime",
+	"_FANTASY": "Fantasy",
+	"_HISTORY": "History",
+	"_HORROR": "Horror",
+	"_MYSTERY": "Mystery",
+	"_OTHER": "Other",
+	"_POETRY": "Poetry",
+	"_ROMANCE": "Romance",
+	"_SCIENCE": "Science",
+	"_THRILLER": "Thriller"
 }
