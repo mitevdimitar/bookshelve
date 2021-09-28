@@ -60,6 +60,7 @@ function MyBooks({
             <AddBookModal 
                 open={open}
                 handleClose={handleClose}
+                refresh={getAllBooks}
             />
             <Grid container item className={classes.button}>
                 <Button

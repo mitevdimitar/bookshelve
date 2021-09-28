@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
 function AddBookModal({
     open,
     handleClose,
-    firebase
+    firebase,
+    refresh
 }) {
     const classes = useStyles();
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
@@ -91,6 +92,15 @@ function AddBookModal({
         setLink(e.target.value);
     }
 
+    const resetSelection = () => {
+        setAuthor("");
+        setTitle("");
+        setNationality("");
+        setGenre("");
+        setCode("");
+        setLink("");
+    }
+
     const onAddBook = async () => {
         const book = {
             author,
@@ -102,12 +112,8 @@ function AddBookModal({
         }
         const id = firebase.uid;
         await addBook(id, book, token);
-        setAuthor("");
-        setTitle("");
-        setNationality("");
-        setGenre("");
-        setCode("");
-        setLink("");
+        refresh();
+        resetSelection();
         handleClose();
     }
 
