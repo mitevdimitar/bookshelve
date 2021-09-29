@@ -8,13 +8,13 @@ import "firebase/auth";
 
 // Your app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyAaJzjoDZXi97gQNzR91AQ73LOhXDkeMfM",
-    authDomain: "bookshelve-66fd8.firebaseapp.com",
-    projectId: "bookshelve-66fd8",
-    storageBucket: "bookshelve-66fd8.appspot.com",
-    messagingSenderId: "755049176809",
-    appId: "1:755049176809:web:17b4fbc750c25ca65c9a78",
-    measurementId: "G-DJRM4R8HWM"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
   //databaseURL: "YOUR_FIREBASE_DB_URL",
 };
 

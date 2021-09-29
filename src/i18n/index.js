@@ -6,29 +6,9 @@ import * as bg from "./languages/bg.json";
 let defaultLang = "en";
 
 const selectedLang = localStorage.getItem("lang");
-console.log(selectedLang)
 if (selectedLang) {
   defaultLang = selectedLang;
 }
-
-console.log(defaultLang)
-
-/* let customTranslations = localStorage.getItem("customTranslations");
-
-if (customTranslations) {
-  customTranslations = JSON.parse(customTranslations);
-
-  for (const translation of customTranslations) {
-    if (translation.value && translation.value !== "") {
-      if (en.default.hasOwnProperty(translation.targetLabel)) {
-        en.default[translation.targetLabel] = translation.value;
-      }
-      if (bg.default.hasOwnProperty(translation.targetLabel)) {
-        bg.default[translation.targetLabel] = translation.value;
-      }
-    }
-  }
-} */
 
 i18n.use(LanguageDetector).init({
   lng: defaultLang,

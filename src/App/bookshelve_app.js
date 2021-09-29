@@ -34,8 +34,6 @@ function App({
 }) {
   const { lang } = settings;
   const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
-/*   console.log(firebase)
-  console.log(firebase.stsTokenManager && firebase.stsTokenManager.accessToken) */
 
   const setSettings = useCallback(async () => {
     const id = firebase.uid;
