@@ -26,9 +26,11 @@ function MenuButtons({ firebase }) {
                     )
                 }
             </Grid>
-            <Grid container justify="flex-end" alignItems="center" item xs={1}>
-                <LanguagePanel />
-            </Grid>
+            {!firebase.isEmpty && (
+                <Grid container justify="flex-end" alignItems="center" item xs={1}>
+                    <LanguagePanel />
+                </Grid>
+            )}
         </>
     )
 }

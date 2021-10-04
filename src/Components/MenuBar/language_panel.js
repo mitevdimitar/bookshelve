@@ -17,7 +17,18 @@ const useStyles = makeStyles((theme) => ({
     },
     secondFlag: {
         position: "absolute",
-        top: 18
+        top: 22
+    },
+    flagBackground: {
+        padding: 5,
+        background: "#D8B77D",
+        //background: "#E7E3C8",
+        borderRadius: 5,
+        "&:hover": {
+            //background: "#A57A32",
+            zIndex: 200,
+            transform: "scale(1.05)"
+        }
     }
 }));
 
@@ -51,11 +62,11 @@ function LanguagePanel({
 
     return (
         <Grid className={classes.flagContainer}>                    
-            <Grid className={classes.mainFlag}>
+            <Grid className={editLangMode && classes.flagBackground}>
                 <img style={{height: 14}} src={lang === 'en' ? EngFlag : BgFlag} alt="British flag" onClick={onFlagClick}/>
             </Grid>
             {editLangMode && (
-                <Grid className={classes.secondFlag} onClick={()=>setLanguage()}>
+                <Grid className={`${classes.secondFlag} ${classes.flagBackground}`} onClick={()=>setLanguage()}>
                     <img style={{height: 14}} src={lang === 'en' ? BgFlag : EngFlag} alt="Bulgarian flag"/>
                 </Grid>
             )}
