@@ -44,12 +44,10 @@ function App({
         type: SET_LANGUAGE,
         data: lang
       });
-      
     }
   }, [firebase.uid, dispatch, token])
 
   useEffect(()=>{
-    localStorage.setItem("lang", lang);
     if (!firebase.isEmpty) {
       setSettings();
     }

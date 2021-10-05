@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import EngFlag from '../../img/eng.png';
 import BgFlag from '../../img/bg.png';
 import { makeStyles } from '@material-ui/core/styles';
-import { updateSettings } from '../../services/settings';
+import { updateSettings, getSettings } from '../../services/settings';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../../services/redux';
 
@@ -44,6 +44,22 @@ function LanguagePanel({
     const onFlagClick = () => {
         setEditLangMode(!editLangMode)
     }
+
+    useEffect(()=>{
+        async function getLanguage() {
+            const id = firebase.uid;
+            const response = await getSettings(id, token);
+            if (response && response.data) {
+                const { lang } = response.data.settings;
+                if(lang !== localStorage.getItem("lang")) {
+                    localStorage.setItem("lang", lang);
+                    window.location.reload();
+                }
+            }
+        }
+        getLanguage();
+        // eslint-disable-next-line
+    }, [])
 
     const setLanguage = async () => {
         /* dispatch({
