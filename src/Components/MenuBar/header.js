@@ -11,7 +11,7 @@ function Header() {
                 <HomeIcon />
             </IconButton>
             <Typography variant="h6">
-                Header
+                Book shelves
             </Typography>
         </Grid>
     )

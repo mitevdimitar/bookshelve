@@ -18,7 +18,7 @@ export const GENRES = [
         value: "fantasy"
     },
     {
-        name: i18n.t("default:_FANTASY"),
+        name: i18n.t("default:_HISTORY"),
         value: "history"
     },
     {
