@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import AddBookModal from "../Components/add_book_modal";
+import BookModal from "../Components/book_modal";
 import { getBooks } from "../services/books";
 import BookRow from "../Components/book_row";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import i18n from '../i18n';
+import { BooksActions } from '../store/actions/action_types';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,10 +29,12 @@ const useStyles = makeStyles((theme) => ({
   
 
 function MyBooks({
-    firebase
+    firebase,
+    myBooks,
+    dispatch
 }) {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const { bookModalOpen } = myBooks;
     const [books, setBooks] = useState([]);
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
@@ -47,26 +50,27 @@ function MyBooks({
         getAllBooks();
     }, [getAllBooks]);
 
-    const openAddBookModal = () => {
-        setOpen(true);
+    const openBookModal = () => {
+        dispatch(BooksActions.setBookModalOpen(true))
     };
 
     const handleClose = () => {
-        setOpen(false);
+        dispatch(BooksActions.setBookModalOpen(false))
     };
 
     return(
         <Grid container className={classes.root}>
-            <AddBookModal 
-                open={open}
-                handleClose={handleClose}
-                refresh={getAllBooks}
-            />
+            {bookModalOpen && (
+                <BookModal 
+                    handleClose={handleClose}
+                    refresh={getAllBooks}
+                />
+            )}
             <Grid container item className={classes.button}>
                 <Button
                     variant="outlined"
                     color="primary"
-                    onClick={openAddBookModal}
+                    onClick={openBookModal}
                 >
                     {i18n.t("default:_ADD_BOOK")}
                 </Button>
@@ -91,7 +95,7 @@ function MyBooks({
             <>
                 {books.map((book, i)=>{
                     return (
-                        <BookRow key={i} book={book} i={i}/>
+                        <BookRow key={i} book={book} i={i} />
                     )
                 })}
             </>

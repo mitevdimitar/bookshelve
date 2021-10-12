@@ -53,13 +53,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function AddBookModal({
-    open,
+function BookModal({
     handleClose,
     firebase,
-    refresh
+    refresh,
+    myBooks
 }) {
     const classes = useStyles();
+    const { bookModalOpen } = myBooks;
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
@@ -119,7 +120,7 @@ function AddBookModal({
 
     return (
         <Modal
-            open={open}
+            open={bookModalOpen}
             onClose={handleClose}
             aria-labelledby="Add book modal"
             aria-describedby="Modal for adding books to database"
@@ -227,4 +228,4 @@ function AddBookModal({
     )
 }
 
-export default connect(mapStateToProps)(AddBookModal);
+export default connect(mapStateToProps)(BookModal);

@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { isMobileDevice } from '../services/mobile';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
+import { BooksActions } from '../store/actions/action_types';
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -33,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 
 function BookRow({
     book,
-    i
+    i,
+    dispatch
 }) {
     const classes = useStyles();
 
@@ -60,7 +64,7 @@ function BookRow({
                     </IconButton>
                 )}
                 <IconButton className={classes.iconButton} color="primary">
-                    <EditIcon />
+                    <EditIcon onClick={()=>dispatch(BooksActions.setBookModalOpen(true))}/>
                 </IconButton>
                 <IconButton className={classes.iconButton}  color="primary">
                     <DeleteIcon />
@@ -70,4 +74,4 @@ function BookRow({
     )
 }
 
-export default BookRow;
+export default connect(mapStateToProps)(BookRow);
