@@ -41,6 +41,11 @@ function BookRow({
 }) {
     const classes = useStyles();
 
+    const onEditClick = () => {
+        dispatch(BooksActions.setBookModalOpen(true));
+        dispatch(BooksActions.setCurrentBook(book));
+    }
+
     return (
         <Grid container className={classes.row}>
             {!isMobileDevice() && (
@@ -64,7 +69,7 @@ function BookRow({
                     </IconButton>
                 )}
                 <IconButton className={classes.iconButton} color="primary">
-                    <EditIcon onClick={()=>dispatch(BooksActions.setBookModalOpen(true))}/>
+                    <EditIcon onClick={() => onEditClick()}/>
                 </IconButton>
                 <IconButton className={classes.iconButton}  color="primary">
                     <DeleteIcon />

@@ -60,7 +60,8 @@ function BookModal({
     myBooks
 }) {
     const classes = useStyles();
-    const { bookModalOpen } = myBooks;
+    const { bookModalOpen, currentBook } = myBooks;
+    console.log({currentBook})
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
