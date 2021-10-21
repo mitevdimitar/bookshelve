@@ -55,7 +55,8 @@ function MyBooks({
     };
 
     const handleClose = () => {
-        dispatch(BooksActions.setBookModalOpen(false))
+        dispatch(BooksActions.setBookModalOpen(false));
+        dispatch(BooksActions.setCurrentBook(null));
     };
 
     return(

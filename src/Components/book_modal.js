@@ -63,12 +63,12 @@ function BookModal({
     const { bookModalOpen, currentBook } = myBooks;
     console.log({currentBook})
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
-    const [author, setAuthor] = useState("");
-    const [title, setTitle] = useState("");
-    const [nationality, setNationality] = useState("");
-    const [genre, setGenre] = useState("");
-    const [code, setCode] = useState("");
-    const [link, setLink] = useState("");
+    const [author, setAuthor] = useState(currentBook ? currentBook.author : "");
+    const [title, setTitle] = useState(currentBook ? currentBook.title : "");
+    const [nationality, setNationality] = useState(currentBook ? currentBook.nationality : "");
+    const [genre, setGenre] = useState(currentBook ? currentBook.genre : "");
+    const [code, setCode] = useState(currentBook ? currentBook.code : "");
+    const [link, setLink] = useState(currentBook ? currentBook.link : "");
 
     const onEnterAuthor = (e) => {
         setAuthor(e.target.value);
