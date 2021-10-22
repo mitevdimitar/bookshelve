@@ -43,6 +43,7 @@ function BookRow({
 
     const onEditClick = () => {
         dispatch(BooksActions.setBookModalOpen(true));
+        dispatch(BooksActions.setBookMode("edit"));
         dispatch(BooksActions.setCurrentBook(book));
     }
 

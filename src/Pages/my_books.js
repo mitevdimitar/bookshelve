@@ -36,6 +36,7 @@ function MyBooks({
     const classes = useStyles();
     const { bookModalOpen } = myBooks;
     const [books, setBooks] = useState([]);
+    console.log(books)
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
 
@@ -51,7 +52,8 @@ function MyBooks({
     }, [getAllBooks]);
 
     const openBookModal = () => {
-        dispatch(BooksActions.setBookModalOpen(true))
+        dispatch(BooksActions.setBookModalOpen(true));
+        dispatch(BooksActions.setBookMode("add"));
     };
 
     const handleClose = () => {

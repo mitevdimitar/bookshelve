@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { addBook } from '../services/books';
+import { addBook, editBook } from '../services/books';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
@@ -60,8 +60,8 @@ function BookModal({
     myBooks
 }) {
     const classes = useStyles();
-    const { bookModalOpen, currentBook } = myBooks;
-    console.log({currentBook})
+    const { bookModalOpen, currentBook, bookMode } = myBooks;
+    console.log({currentBook, bookMode})
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState(currentBook ? currentBook.author : "");
     const [title, setTitle] = useState(currentBook ? currentBook.title : "");
@@ -103,7 +103,7 @@ function BookModal({
         setLink("");
     }
 
-    const onAddBook = async () => {
+    const onSetBook = async () => {
         const book = {
             author,
             title,
@@ -113,7 +113,7 @@ function BookModal({
             link
         }
         const id = firebase.uid;
-        await addBook(id, book, token);
+        bookMode === "add" ? await addBook(id, book, token) : await editBook(id, book, token);
         refresh();
         resetSelection();
         handleClose();
@@ -219,9 +219,9 @@ function BookModal({
                         className={classes.button}
                         variant="contained"
                         color="primary"
-                        onClick={onAddBook}
+                        onClick={onSetBook}
                     >
-                        {i18n.t("default:_ADD")}
+                        {bookMode === "add" ? i18n.t("default:_ADD") : i18n.t("default:_EDIT")}
                     </Button>
                 </Grid>
             </Grid>
