@@ -70,7 +70,7 @@ function BookRow({
                     </IconButton>
                 )}
                 <IconButton className={classes.iconButton} color="primary">
-                    <EditIcon onClick={() => onEditClick()}/>
+                    <EditIcon /* onClick={() => onEditClick()} *//>
                 </IconButton>
                 <IconButton className={classes.iconButton}  color="primary">
                     <DeleteIcon />
