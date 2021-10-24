@@ -36,14 +36,14 @@ function MyBooks({
     const classes = useStyles();
     const { bookModalOpen } = myBooks;
     const [books, setBooks] = useState([]);
-    console.log(books)
+
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
 
     const getAllBooks = useCallback(async () => {   
         const response = token && await getBooks(id, token);
         if (response && response.data) {
-            setBooks(Object.values(response.data));
+            setBooks(Object.entries(response.data));
         }
     }, [id, token]);
     
@@ -96,7 +96,9 @@ function MyBooks({
                 </Grid>
             )}
             <>
-                {books.map((book, i)=>{
+                {books.map((bookArr, i)=>{
+                    const [bookId, book] = bookArr;
+                    book.id = bookId;
                     return (
                         <BookRow key={i} book={book} i={i} />
                     )

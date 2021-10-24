@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 function BookRow({
     book,
     i,
-    dispatch
+    dispatch,
 }) {
     const classes = useStyles();
 
@@ -69,8 +69,8 @@ function BookRow({
                         <Avatar className={classes.avatar} alt="goodreads logo" src={GoodreadsAvatar} />
                     </IconButton>
                 )}
-                <IconButton className={classes.iconButton} color="primary">
-                    <EditIcon /* onClick={() => onEditClick()} *//>
+                <IconButton onClick={() => onEditClick()} className={classes.iconButton} color="primary">
+                    <EditIcon />
                 </IconButton>
                 <IconButton className={classes.iconButton}  color="primary">
                     <DeleteIcon />

@@ -61,7 +61,6 @@ function BookModal({
 }) {
     const classes = useStyles();
     const { bookModalOpen, currentBook, bookMode } = myBooks;
-    console.log({currentBook, bookMode})
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState(currentBook ? currentBook.author : "");
     const [title, setTitle] = useState(currentBook ? currentBook.title : "");
@@ -112,8 +111,9 @@ function BookModal({
             code,
             link
         }
-        const id = firebase.uid;
-        bookMode === "add" ? await addBook(id, book, token) : await editBook(id, book, token);
+        const uid = firebase.uid;
+        const bookId = currentBook && currentBook.id;
+        bookMode === "add" ? await addBook(uid, book, token) : await editBook(uid, book, token, bookId);
         refresh();
         resetSelection();
         handleClose();

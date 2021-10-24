@@ -78,7 +78,7 @@ function LanguagePanel({
 
     return (
         <Grid className={classes.flagContainer}>                    
-            <Grid className={editLangMode && classes.flagBackground}>
+            <Grid className={editLangMode ? classes.flagBackground : ""}>
                 <img style={{height: 14}} src={lang === 'en' ? EngFlag : BgFlag} alt="British flag" onClick={onFlagClick}/>
             </Grid>
             {editLangMode && (
