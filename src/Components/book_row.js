@@ -11,6 +11,7 @@ import { isMobileDevice } from '../services/mobile';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { BooksActions } from '../store/actions/action_types';
+import { deleteBook } from '../services/books';
 
 const useStyles = makeStyles((theme) => ({
     row: {
@@ -38,13 +39,23 @@ function BookRow({
     book,
     i,
     dispatch,
+    firebase,
+    refresh
 }) {
     const classes = useStyles();
+    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
 
     const onEditClick = () => {
         dispatch(BooksActions.setBookModalOpen(true));
         dispatch(BooksActions.setBookMode("edit"));
         dispatch(BooksActions.setCurrentBook(book));
+    }
+
+    const onDeleteClick = async () => {
+        const uid = firebase.uid;
+        const bookId = book && book.id;
+        await deleteBook(uid, token, bookId);
+        refresh();
     }
 
     return (
@@ -72,7 +83,7 @@ function BookRow({
                 <IconButton onClick={() => onEditClick()} className={classes.iconButton} color="primary">
                     <EditIcon />
                 </IconButton>
-                <IconButton className={classes.iconButton}  color="primary">
+                <IconButton onClick={() => onDeleteClick()} className={classes.iconButton}  color="primary">
                     <DeleteIcon />
                 </IconButton>
             </Grid>

@@ -24,6 +24,16 @@ export const editBook = async (id, book, token, bookId) => {
     });
 }
 
+export const deleteBook = async (id, token, bookId) => {
+  await axios.delete(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books/${bookId}.json?auth=${token}`)
+    .then(function (response) {
+      console.log(response.statusText);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
 export const getBooks = async (id, token) => {
   return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books.json?auth=${token}`)
     .then(function (response) {

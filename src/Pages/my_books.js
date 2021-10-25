@@ -100,7 +100,12 @@ function MyBooks({
                     const [bookId, book] = bookArr;
                     book.id = bookId;
                     return (
-                        <BookRow key={i} book={book} i={i} />
+                        <BookRow 
+                            key={i} 
+                            book={book} 
+                            i={i}
+                            refresh={getAllBooks}
+                        />
                     )
                 })}
             </>
