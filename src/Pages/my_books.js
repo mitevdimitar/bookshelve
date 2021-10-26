@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import i18n from '../i18n';
 import { BooksActions } from '../store/actions/action_types';
+import IconButton from "@material-ui/core/IconButton";
+import FilterListIcon from '@material-ui/icons/FilterList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,7 +71,7 @@ function MyBooks({
                     refresh={getAllBooks}
                 />
             )}
-            <Grid container item className={classes.button}>
+            <Grid container justify="space-between" item className={classes.button}>
                 <Button
                     variant="outlined"
                     color="primary"
@@ -77,6 +79,9 @@ function MyBooks({
                 >
                     {i18n.t("default:_ADD_BOOK")}
                 </Button>
+                <IconButton color="primary">
+                    <FilterListIcon />
+                </IconButton>
             </Grid>
             {books.length > 0 && (
                 <Grid container className={classes.headerRow}>
