@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { addBook, editBook } from '../services/books';
+import { addAuthor, addBook, editBook } from '../services/books';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
@@ -114,6 +114,14 @@ function BookModal({
         const uid = firebase.uid;
         const bookId = currentBook && currentBook.id;
         bookMode === "add" ? await addBook(uid, book, token) : await editBook(uid, book, token, bookId);
+        //check also if author exists / compare to redux authors
+        if (bookMode === "add") {
+            const bookAuthor = {
+                name: author,
+                nationality
+            }
+            await addAuthor(uid, bookAuthor, token);
+        }
         refresh();
         resetSelection();
         handleClose();

@@ -54,3 +54,15 @@ export const getNationalities = async () => {
       console.log(error);
     });
 }
+
+export const addAuthor = async (id, author, token) => {
+  await axios.put(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/authors.json?auth=${token}`, {
+      ...author
+    })
+    .then(function (response) {
+      console.log(response.statusText);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
