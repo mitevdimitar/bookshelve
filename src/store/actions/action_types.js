@@ -1,4 +1,4 @@
-import { SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK } from "../constants";
+import { SET_AUTHORS, SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK } from "../constants";
 
 // SIGN IN AND SIGN UP
 export const SIGN_SUCCESS = "SIGNUP_SUCCESS";
@@ -23,6 +23,11 @@ export const BooksActions = {
     setBookMode: (data) =>
       Object.assign({
         type: SET_BOOK_MODE,
+        data,
+    }),
+    setAuthors: (data) =>
+      Object.assign({
+        type: SET_AUTHORS,
         data,
     })
 }

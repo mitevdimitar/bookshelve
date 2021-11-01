@@ -44,6 +44,16 @@ export const getBooks = async (id, token) => {
     });
 }
 
+export const getAuthors = async (id, token) => {
+  return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/authors.json?auth=${token}`)
+    .then(function (response) {
+      return response;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
 export const getNationalities = async () => {
   return await axios.get("https://restcountries.eu/rest/v2/all")
     .then(function (response) {

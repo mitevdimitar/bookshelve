@@ -1,3 +1,4 @@
 export const SET_BOOK_MODAL_OPEN = "SET_BOOK_MODAL_OPEN";
 export const SET_CURRENT_BOOK = "SET_CURRENT_BOOK";
 export const SET_BOOK_MODE = "SET_BOOK_MODE";
+export const SET_AUTHORS = "SET_AUTHORS";

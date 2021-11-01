@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import BookModal from "../Components/book_modal";
-import { getBooks } from "../services/books";
+import { getBooks, getAuthors } from "../services/books";
 import BookRow from "../Components/book_row";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
@@ -48,10 +48,18 @@ function MyBooks({
             setBooks(Object.entries(response.data));
         }
     }, [id, token]);
+
+    const getAllAuthors = useCallback(async () => {   
+        const response = token && await getAuthors(id, token);
+        if (response && response.data) {
+            dispatch(BooksActions.setAuthors(response.data));
+        }
+    }, [id, token, dispatch]);
     
     useEffect(()=>{
         getAllBooks();
-    }, [getAllBooks]);
+        getAllAuthors();
+    }, [getAllBooks, getAllAuthors]);
 
     const openBookModal = () => {
         dispatch(BooksActions.setBookModalOpen(true));

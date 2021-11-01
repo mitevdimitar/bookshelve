@@ -1,9 +1,10 @@
-import { SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK } from "../constants";
+import { SET_AUTHORS, SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK } from "../constants";
 
 const initialState = {
     bookModalOpen: false,
     currentBook: null,
-    bookMode: "add"
+    bookMode: "add",
+    authors: []
   };
   
 const booksReducer = (state = Object.assign({}, initialState), action) => {
@@ -20,6 +21,10 @@ const booksReducer = (state = Object.assign({}, initialState), action) => {
         case SET_CURRENT_BOOK:
             return Object.assign({}, state, {
                 currentBook: data,
+            });
+        case SET_AUTHORS:
+            return Object.assign({}, state, {
+                authors: data,
             });
         default:
             return state;
