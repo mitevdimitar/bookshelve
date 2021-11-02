@@ -60,7 +60,7 @@ function BookModal({
     myBooks
 }) {
     const classes = useStyles();
-    const { bookModalOpen, currentBook, bookMode } = myBooks;
+    const { bookModalOpen, currentBook, bookMode, authors } = myBooks;
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const [author, setAuthor] = useState(currentBook ? currentBook.author : "");
     const [title, setTitle] = useState(currentBook ? currentBook.title : "");
@@ -116,11 +116,14 @@ function BookModal({
         bookMode === "add" ? await addBook(uid, book, token) : await editBook(uid, book, token, bookId);
         //check also if author exists / compare to redux authors
         if (bookMode === "add") {
-            const bookAuthor = {
-                name: author,
-                nationality
+            const authorNames = authors.map(author => author.name);
+            if (!authorNames.includes(author)) {
+                const bookAuthor = {
+                    name: author,
+                    nationality
+                }
+                await addAuthor(uid, bookAuthor, token);
             }
-            await addAuthor(uid, bookAuthor, token);
         }
         refresh();
         resetSelection();

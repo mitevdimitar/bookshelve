@@ -66,7 +66,7 @@ export const getNationalities = async () => {
 }
 
 export const addAuthor = async (id, author, token) => {
-  await axios.put(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/authors.json?auth=${token}`, {
+  await axios.post(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/authors.json?auth=${token}`, {
       ...author
     })
     .then(function (response) {

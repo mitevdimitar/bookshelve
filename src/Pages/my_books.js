@@ -36,7 +36,7 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { bookModalOpen } = myBooks;
+    const { bookModalOpen, authors } = myBooks;
     const [books, setBooks] = useState([]);
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
@@ -52,14 +52,15 @@ function MyBooks({
     const getAllAuthors = useCallback(async () => {   
         const response = token && await getAuthors(id, token);
         if (response && response.data) {
-            dispatch(BooksActions.setAuthors(response.data));
+            const authorsArr = Object.values(response.data)
+            dispatch(BooksActions.setAuthors(authorsArr));
         }
     }, [id, token, dispatch]);
     
     useEffect(()=>{
         getAllBooks();
         getAllAuthors();
-    }, [getAllBooks, getAllAuthors]);
+    }, [getAllBooks, getAllAuthors, authors]);
 
     const openBookModal = () => {
         dispatch(BooksActions.setBookModalOpen(true));
