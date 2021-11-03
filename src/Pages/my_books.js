@@ -11,6 +11,7 @@ import i18n from '../i18n';
 import { BooksActions } from '../store/actions/action_types';
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from '@material-ui/icons/FilterList';
+import FiltersModal from "../Components/filters_modal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +37,7 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { bookModalOpen, authors } = myBooks;
+    const { filtersModalOpen, bookModalOpen, authors } = myBooks;
     const [books, setBooks] = useState([]);
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
@@ -71,6 +72,14 @@ function MyBooks({
         dispatch(BooksActions.setBookModalOpen(false));
         dispatch(BooksActions.setCurrentBook(null));
     };
+    
+    const openFiltersModal = () => {
+        dispatch(BooksActions.setFiltersModalOpen(true));
+    };
+
+    const handleFiltersClose = () => {
+        dispatch(BooksActions.setFiltersModalOpen(false));
+    };
 
     return(
         <Grid container className={classes.root}>
@@ -78,6 +87,11 @@ function MyBooks({
                 <BookModal 
                     handleClose={handleClose}
                     refresh={getAllBooks}
+                />
+            )}
+            {filtersModalOpen && (
+                <FiltersModal 
+                    handleClose={handleFiltersClose}
                 />
             )}
             <Grid container justify="space-between" item className={classes.button}>
@@ -88,7 +102,10 @@ function MyBooks({
                 >
                     {i18n.t("default:_ADD_BOOK")}
                 </Button>
-                <IconButton color="primary">
+                <IconButton 
+                    color="primary"
+                    onClick={openFiltersModal}
+                >
                     <FilterListIcon />
                 </IconButton>
             </Grid>

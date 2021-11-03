@@ -17,6 +17,7 @@ import { isMobileDevice } from '../services/mobile';
 import SelectNationalities from './select_nationalities';
 import { GENRES } from '../services/constants';
 import i18n from '../i18n';
+import { BooksActions } from '../store/actions/action_types';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -57,7 +58,8 @@ function BookModal({
     handleClose,
     firebase,
     refresh,
-    myBooks
+    myBooks,
+    dispatch
 }) {
     const classes = useStyles();
     const { bookModalOpen, currentBook, bookMode, authors } = myBooks;
@@ -114,8 +116,8 @@ function BookModal({
         const uid = firebase.uid;
         const bookId = currentBook && currentBook.id;
         bookMode === "add" ? await addBook(uid, book, token) : await editBook(uid, book, token, bookId);
-        //check also if author exists / compare to redux authors
         if (bookMode === "add") {
+            //check also if author exists / compare to redux authors
             const authorNames = authors.map(author => author.name);
             if (!authorNames.includes(author)) {
                 const bookAuthor = {
@@ -123,6 +125,9 @@ function BookModal({
                     nationality
                 }
                 await addAuthor(uid, bookAuthor, token);
+                const updatedAuthors = [...authors];
+                updatedAuthors.push(bookAuthor);
+                dispatch(BooksActions.setAuthors(updatedAuthors));
             }
         }
         refresh();
