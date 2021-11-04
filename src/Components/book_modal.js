@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,6 +16,7 @@ import SelectNationalities from './select_nationalities';
 import { GENRES } from '../services/constants';
 import i18n from '../i18n';
 import { BooksActions } from '../store/actions/action_types';
+import ModalHeader from './modal_header';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,15 +30,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         boxShadow: theme.shadows[5],
         //padding: theme.spacing(3),
-    },
-    header: {
-        height: "10%",
-        backgroundColor: theme.palette.primary.main,
-        color: "white",
-        paddingLeft: 20
-    },
-    closeIcon: {
-        cursor: "pointer"
     },
     body: {
         height: "80%",
@@ -143,16 +133,7 @@ function BookModal({
             aria-describedby="Modal for adding books to database"
         >
             <Grid /* container  */className={classes.paper}>
-                <Grid container className={classes.header}>
-                    <Grid container alignItems="center" item xs={11}>
-                        <Typography variant="h6">
-                            {i18n.t("default:_ADD_BOOK")}
-                        </Typography>
-                    </Grid>
-                    <Grid container alignItems="center" justify="center" item xs={1}>
-                        <HighlightOffIcon className={classes.closeIcon} onClick={()=>handleClose()} />
-                    </Grid>
-                </Grid>
+                <ModalHeader handleClose={handleClose} title={i18n.t("default:_ADD_BOOK")} />
                 <Grid container className={classes.body}>
                     <Grid item xs={12}>
                         <TextField

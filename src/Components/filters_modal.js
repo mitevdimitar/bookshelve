@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { isMobileDevice } from '../services/mobile';
+import ModalHeader from './modal_header';
+import i18n from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,6 +37,7 @@ function Filters({
             aria-describedby="Modal for adding books to database"
         >
             <Grid className={classes.paper}>
+                <ModalHeader handleClose={handleClose} title={i18n.t("default:_FILTERS")} />
                 Filters  
             </Grid>
         </Modal>
