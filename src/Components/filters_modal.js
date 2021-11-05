@@ -7,6 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { isMobileDevice } from '../services/mobile';
 import ModalHeader from './modal_header';
 import i18n from '../i18n';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -20,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         boxShadow: theme.shadows[5],
     },
+    form: {
+        marginTop: 50,
+        marginLeft: 50,
+        width: "100%"
+    },
+    formRow: {
+        marginTop: 20
+    }
 }));
 
 function Filters({
@@ -38,7 +50,28 @@ function Filters({
         >
             <Grid className={classes.paper}>
                 <ModalHeader handleClose={handleClose} title={i18n.t("default:_FILTERS")} />
-                Filters  
+                <FormControl className={classes.form} component="fieldset">
+                    <RadioGroup
+                        aria-label="filter"
+                        defaultValue="author"
+                        name="radio-buttons-group"
+                    >
+                        <Grid container alignItems="center" className={classes.formRow}>
+                            <Grid item xs={5}>
+                                <FormControlLabel value="author" control={<Radio />} label="Author" />
+                            </Grid>
+                            <Grid item xs={7}>
+                                Select
+                            </Grid>
+                        </Grid>
+                        <Grid container alignItems="center"  className={classes.formRow}>
+                            <FormControlLabel value="genre" control={<Radio />} label="Genre" />
+                        </Grid>
+                        <Grid container alignItems="center"  className={classes.formRow}>
+                            <FormControlLabel value="nationality" control={<Radio />} label="Nationality" />
+                        </Grid>
+                    </RadioGroup>
+                </FormControl>
             </Grid>
         </Modal>
     )
