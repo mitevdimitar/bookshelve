@@ -37,7 +37,7 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { filtersModalOpen, bookModalOpen, authors } = myBooks;
+    const { filtersModalOpen, bookModalOpen } = myBooks;
     const [books, setBooks] = useState([]);
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
@@ -61,7 +61,7 @@ function MyBooks({
     useEffect(()=>{
         getAllBooks();
         getAllAuthors();
-    }, [getAllBooks, getAllAuthors, authors]);
+    }, [getAllBooks, getAllAuthors]);
 
     const openBookModal = () => {
         dispatch(BooksActions.setBookModalOpen(true));
@@ -84,7 +84,7 @@ function MyBooks({
     return(
         <Grid container className={classes.root}>
             {bookModalOpen && (
-                <BookModal 
+                <BookModal
                     handleClose={handleClose}
                     refresh={getAllBooks}
                 />

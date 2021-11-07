@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getNationalities } from '../services/books';
+import React, { useEffect, useState, useCallback } from 'react';
+//import { getNationalities } from '../services/books';
 import Grid from "@material-ui/core/Grid";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,18 +14,21 @@ function SelectNationalities({
 }) {
     const [nationalities, setNationalities] = useState([]);
 
-    const getNationalitiesList = async () => {
-        const response = await getNationalities();
+    const getNationalitiesList = useCallback(/* async */ () => {
+        /* const response = await getNationalities();
+        console.log({response})
         if(response) {
             setNationalities(response.data);
         } else {
-            setNationalities(NATIONALITIES)
-        }
-    }
+        } */
+        setNationalities(NATIONALITIES);
+    }, [])
 
     useEffect(()=>{
-        getNationalitiesList();
-    }, [])
+        if (nationalities.length === 0) {
+            getNationalitiesList();
+        }
+    }, [getNationalitiesList, nationalities.length])
 
     const getNationalitiesOptions = () => {
         return nationalities.map((nationality, index)=>{

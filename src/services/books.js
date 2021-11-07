@@ -55,14 +55,8 @@ export const getAuthors = async (id, token) => {
 }
 
 export const getNationalities = async () => {
-  return await axios.get("https://restcountries.eu/rest/v2/all")
-    .then(function (response) {
-      return response;
-    })
-    .catch(function (error) {
-
-      console.log(error);
-    });
+  const response = await axios.get("https://restcountries.com/v3.1/all");
+  return response;
 }
 
 export const addAuthor = async (id, author, token) => {
