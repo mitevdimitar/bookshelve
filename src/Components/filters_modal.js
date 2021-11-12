@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
@@ -11,6 +11,10 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,11 +30,14 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
         marginTop: 50,
-        marginLeft: 50,
-        width: "100%"
+        paddingLeft: "10%",
+        width: "80%",
     },
     formRow: {
         marginTop: 20
+    },
+    select: {
+        marginBottom: 20
     }
 }));
 
@@ -39,7 +46,12 @@ function Filters({
     handleClose
 }) {
     const classes = useStyles();
-    const { filtersModalOpen } = myBooks;
+    const { filtersModalOpen, authors } = myBooks;
+    const [filterValue, setFilterValue] = useState("");
+
+    const handleAuthorChange = (e) => {
+        setFilterValue(e.target.value);
+    }
 
     return (
         <Modal
@@ -60,8 +72,21 @@ function Filters({
                             <Grid item xs={5}>
                                 <FormControlLabel value="author" control={<Radio />} label="Author" />
                             </Grid>
-                            <Grid item xs={7}>
-                                Select
+                            <Grid className={classes.select} item xs={7}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="author-select-label">Author</InputLabel>
+                                    <Select
+                                        labelId="author-select-label"
+                                        id="author-select"
+                                        value={filterValue}
+                                        label="Author"
+                                        onChange={handleAuthorChange}
+                                    >
+                                        {authors.map((author, ind) => {
+                                            return <MenuItem key={ind} value={author.name}>{author.name}</MenuItem>
+                                        })}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                         <Grid container alignItems="center"  className={classes.formRow}>
