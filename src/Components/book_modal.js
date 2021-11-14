@@ -6,7 +6,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { addAuthor, addBook, editBook } from '../services/books';
 import { connect } from "react-redux";
@@ -17,6 +16,7 @@ import { GENRES } from '../services/constants';
 import i18n from '../i18n';
 import { BooksActions } from '../store/actions/action_types';
 import ModalHeader from './modal_header';
+import ModalFooter from './modal_footer';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,13 +34,6 @@ const useStyles = makeStyles((theme) => ({
     body: {
         height: "80%",
         padding: "15px 25px"
-    },
-    footer: {
-        height: "10%"
-    },
-    button: {
-        minWidth: 100,
-        marginRight: 20
     },
 }));
 
@@ -211,16 +204,10 @@ function BookModal({
                         />
                     </Grid>
                 </Grid>
-                <Grid container className={classes.footer} justify="flex-end" alignItems="flex-start">
-                    <Button
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        onClick={onSetBook}
-                    >
-                        {bookMode === "add" ? i18n.t("default:_ADD") : i18n.t("default:_EDIT")}
-                    </Button>
-                </Grid>
+                <ModalFooter 
+                    buttonName={bookMode === "add" ? i18n.t("default:_ADD") : i18n.t("default:_EDIT")}
+                    onButtonClick={onSetBook}
+                />
             </Grid>
         </Modal>
     )
