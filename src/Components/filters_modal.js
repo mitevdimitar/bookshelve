@@ -6,6 +6,7 @@ import { mapStateToProps } from '../services/redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { isMobileDevice } from '../services/mobile';
 import ModalHeader from './modal_header';
+import ModalFooter from './modal_footer';
 import i18n from '../i18n';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -53,6 +54,10 @@ function Filters({
         setFilterValue(e.target.value);
     }
 
+    const onApplyFilter = () => {
+        console.log('applying filter')
+    }
+
     return (
         <Modal
             open={filtersModalOpen}
@@ -97,6 +102,10 @@ function Filters({
                         </Grid>
                     </RadioGroup>
                 </FormControl>
+                <ModalFooter 
+                    buttonName={i18n.t("default:_APPLY")}
+                    onButtonClick={onApplyFilter}
+                />
             </Grid>
         </Modal>
     )

@@ -5,7 +5,9 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     footer: {
-        height: "10%"
+        height: "10%",
+        position: "absolute",
+        bottom: 10,
     },
     button: {
         minWidth: 100,
