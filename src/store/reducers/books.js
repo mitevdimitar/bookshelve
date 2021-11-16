@@ -1,11 +1,13 @@
-import { SET_AUTHORS, SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK, SET_FILTERS_MODAL_OPEN } from "../constants";
+import { SET_AUTHORS, SET_BOOK_MODAL_OPEN, SET_BOOK_MODE, SET_CURRENT_BOOK, SET_FILTERS_MODAL_OPEN, SET_FILTER_TYPE, SET_FILTER_VALUE } from "../constants";
 
 const initialState = {
     bookModalOpen: false,
     filtersModalOpen: false,
     currentBook: null,
     bookMode: "add",
-    authors: []
+    authors: [],
+    filterType: "author",
+    filterValue: ""
   };
   
 const booksReducer = (state = Object.assign({}, initialState), action) => {
@@ -30,6 +32,14 @@ const booksReducer = (state = Object.assign({}, initialState), action) => {
         case SET_AUTHORS:
             return Object.assign({}, state, {
                 authors: data,
+            });
+        case SET_FILTER_TYPE:
+            return Object.assign({}, state, {
+                filterType: data,
+            });
+        case SET_FILTER_VALUE:
+            return Object.assign({}, state, {
+                filterValue: data,
             });
         default:
             return state;

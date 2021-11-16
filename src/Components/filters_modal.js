@@ -47,11 +47,11 @@ function Filters({
     handleClose
 }) {
     const classes = useStyles();
-    const { filtersModalOpen, authors } = myBooks;
-    const [filterValue, setFilterValue] = useState("");
+    const { filtersModalOpen, authors, filterType, filterValue } = myBooks;
+    const [tempFilterValue, setTempFilterValue] = useState(filterValue);
 
     const handleAuthorChange = (e) => {
-        setFilterValue(e.target.value);
+        setTempFilterValue(e.target.value);
     }
 
     const onApplyFilter = () => {
@@ -70,7 +70,7 @@ function Filters({
                 <FormControl className={classes.form} component="fieldset">
                     <RadioGroup
                         aria-label="filter"
-                        defaultValue="author"
+                        defaultValue={filterType}
                         name="radio-buttons-group"
                     >
                         <Grid container alignItems="center" className={classes.formRow}>
@@ -83,7 +83,7 @@ function Filters({
                                     <Select
                                         labelId="author-select-label"
                                         id="author-select"
-                                        value={filterValue}
+                                        value={tempFilterValue}
                                         label="Author"
                                         onChange={handleAuthorChange}
                                     >
