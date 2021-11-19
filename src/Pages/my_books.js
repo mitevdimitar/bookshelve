@@ -37,16 +37,23 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { filtersModalOpen, bookModalOpen } = myBooks;
+    const { filtersModalOpen, bookModalOpen, filterValue } = myBooks;
     const [books, setBooks] = useState([]);
+    console.log({filterValue})
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
 
+    const filterBooks = (book) => {
+        console.log(book)
+        return book
+    }
+
     const getAllBooks = useCallback(async () => {   
         const response = token && await getBooks(id, token);
         if (response && response.data) {
-            setBooks(Object.entries(response.data));
+            const books = Object.entries(response.data);
+            setBooks(books.filter(filterBooks));
         }
     }, [id, token]);
 

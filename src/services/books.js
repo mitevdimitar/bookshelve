@@ -35,7 +35,9 @@ export const deleteBook = async (id, token, bookId) => {
 }
 
 export const getBooks = async (id, token) => {
-  return await axios.get(`https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books.json?auth=${token}`)
+  let url = `https://bookshelve-66fd8-default-rtdb.europe-west1.firebasedatabase.app/${id}/books.json?auth=${token}`;
+
+  return await axios.get(url)
     .then(function (response) {
       return response;
     })
