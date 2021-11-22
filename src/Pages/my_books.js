@@ -39,14 +39,20 @@ function MyBooks({
     const classes = useStyles();
     const { filtersModalOpen, bookModalOpen, filterValue } = myBooks;
     const [books, setBooks] = useState([]);
-    console.log({filterValue})
+    console.log({filterValue, books})
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
 
     const filterBooks = (book) => {
-        console.log(book)
-        return book
+        if (filterValue) {
+            const bookValue = book[1];
+            if (filterValue === bookValue.author) {
+                return book;
+            }
+        } else {
+            return book
+        }
     }
 
     const getAllBooks = useCallback(async () => {   
@@ -55,7 +61,8 @@ function MyBooks({
             const books = Object.entries(response.data);
             setBooks(books.filter(filterBooks));
         }
-    }, [id, token]);
+        // eslint-disable-next-line
+    }, [id, token, filterValue]);
 
     const getAllAuthors = useCallback(async () => {   
         const response = token && await getAuthors(id, token);
