@@ -12,6 +12,7 @@ import { BooksActions } from '../store/actions/action_types';
 import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltersModal from "../Components/filters_modal";
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -95,6 +96,10 @@ function MyBooks({
         dispatch(BooksActions.setFiltersModalOpen(false));
     };
 
+    const handleDelete = () => {
+        dispatch(BooksActions.setFilterValue(""));
+    };
+
     return(
         <Grid container className={classes.root}>
             {bookModalOpen && (
@@ -116,12 +121,17 @@ function MyBooks({
                 >
                     {i18n.t("default:_ADD_BOOK")}
                 </Button>
-                <IconButton 
-                    color="primary"
-                    onClick={openFiltersModal}
-                >
-                    <FilterListIcon />
-                </IconButton>
+                <Grid item>
+                    {filterValue && (
+                        <Chip variant="outlined" color="primary" label={filterValue} onDelete={handleDelete} />
+                    )}
+                    <IconButton 
+                        color="primary"
+                        onClick={openFiltersModal}
+                    >
+                        <FilterListIcon />
+                    </IconButton>
+                </Grid>
             </Grid>
             {books.length > 0 && (
                 <Grid container className={classes.headerRow}>
