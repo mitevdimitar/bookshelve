@@ -16,6 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { BooksActions } from '../store/actions/action_types';
+import { GENRES } from '../services/constants';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +57,11 @@ function Filters({
         setTempFilterValue(e.target.value);
     }
 
+    const handleGenreChange = (e) => {
+        console.log(e.target.value)
+        setTempFilterValue(e.target.value);
+    }
+
     const onApplyFilter = () => {
         dispatch(BooksActions.setFilterValue(tempFilterValue));
         handleClose();
@@ -83,16 +89,16 @@ function Filters({
                     >
                         <Grid container alignItems="center" className={classes.formRow}>
                             <Grid item xs={5}>
-                                <FormControlLabel value="author" control={<Radio />} label="Author" />
+                                <FormControlLabel value="author" control={<Radio />} label={i18n.t("default:_AUTHOR")}/>
                             </Grid>
                             <Grid className={classes.select} item xs={7}>
                                 <FormControl fullWidth>
-                                    <InputLabel id="author-select-label">Author</InputLabel>
+                                    <InputLabel id="author-select-label">{i18n.t("default:_AUTHOR")}</InputLabel>
                                     <Select
                                         labelId="author-select-label"
                                         id="author-select"
                                         value={tempFilterValue}
-                                        label="Author"
+                                        label={i18n.t("default:_AUTHOR")}
                                         onChange={handleAuthorChange}
                                     >
                                         {authors.map((author, ind) => {
@@ -103,10 +109,30 @@ function Filters({
                             </Grid>
                         </Grid>
                         <Grid container alignItems="center"  className={classes.formRow}>
-                            <FormControlLabel value="genre" control={<Radio />} label="Genre" />
+                            <Grid item xs={5}>
+                                <FormControlLabel value="genre" control={<Radio />} label={i18n.t("default:_GENRE")} />
+                            </Grid>
+                            <Grid className={classes.select} item xs={7}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="genre-select-label">{i18n.t("default:_GENRE")}</InputLabel>
+                                    <Select
+                                        labelId="genre-select-label"
+                                        id="genre-select"
+                                        value={tempFilterValue}
+                                        label={i18n.t("default:_GENRE")}
+                                        onChange={handleGenreChange}
+                                    >
+                                        {GENRES.map((genre, ind) => {
+                                            return <MenuItem key={ind} value={genre.value}>{genre.name}</MenuItem>
+                                        })}
+                                    </Select>
+                                </FormControl>
+                            </Grid>
                         </Grid>
                         <Grid container alignItems="center"  className={classes.formRow}>
-                            <FormControlLabel value="nationality" control={<Radio />} label="Nationality" />
+                            <Grid item xs={5}>
+                                <FormControlLabel value="nationality" control={<Radio />} label={i18n.t("default:_NATIONALITY")} />
+                            </Grid>
                         </Grid>
                     </RadioGroup>
                 </FormControl>
