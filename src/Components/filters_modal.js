@@ -61,6 +61,10 @@ function Filters({
         handleClose();
     }
 
+    const handleTypeChange = (e) => {
+        dispatch(BooksActions.setFilterType(e.target.value));
+    }
+
     return (
         <Modal
             open={filtersModalOpen}
@@ -73,8 +77,9 @@ function Filters({
                 <FormControl className={classes.form} component="fieldset">
                     <RadioGroup
                         aria-label="filter"
-                        defaultValue={filterType}
+                        value={filterType}
                         name="radio-buttons-group"
+                        onChange={handleTypeChange}
                     >
                         <Grid container alignItems="center" className={classes.formRow}>
                             <Grid item xs={5}>

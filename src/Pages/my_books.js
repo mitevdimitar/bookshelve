@@ -38,9 +38,9 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { filtersModalOpen, bookModalOpen, filterValue } = myBooks;
+    const { filtersModalOpen, bookModalOpen, filterValue, filterType } = myBooks;
     const [books, setBooks] = useState([]);
-    console.log({filterValue, books})
+    console.log({filterValue, filterType, books})
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
