@@ -40,19 +40,35 @@ function MyBooks({
     const classes = useStyles();
     const { filtersModalOpen, bookModalOpen, filterValue, filterType } = myBooks;
     const [books, setBooks] = useState([]);
-    console.log({filterValue, filterType, books})
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
 
     const filterBooks = (book) => {
+        const bookValue = book[1];
         if (filterValue) {
-            const bookValue = book[1];
-            if (filterValue === bookValue.author) {
-                return book;
-            }
+            switch (filterType) {
+                case 'author':
+                    if (filterValue === bookValue.author) {
+                        return book;
+                    }
+                    break;
+                case 'genre':
+                    if (filterValue === bookValue.genre) {
+                        return book;
+                    }
+                    break;
+                case 'nationality':
+                    console.log({book})
+                    if (filterValue === bookValue.nationality) {
+                        return book;
+                    }
+                    break;
+                default:
+                    return book;
+                }
         } else {
-            return book
+            return book;
         }
     }
 

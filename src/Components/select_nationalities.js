@@ -33,7 +33,7 @@ function SelectNationalities({
     const getNationalitiesOptions = () => {
         return nationalities.map((nationality, index)=>{
             return (
-                <MenuItem key={index} value={nationality.name}>
+                <MenuItem key={index} value={nationality.value}>
                     <Grid container>
                         {nationality.flag && (
                             <Grid item>

@@ -16,7 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { BooksActions } from '../store/actions/action_types';
-import { GENRES } from '../services/constants';
+import { GENRES, NATIONALITIES } from '../services/constants';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
     },
     form: {
-        marginTop: 50,
+        marginTop: 20,
         paddingLeft: "10%",
         width: "80%",
     },
@@ -53,12 +53,7 @@ function Filters({
     const { filtersModalOpen, authors, filterType, filterValue } = myBooks;
     const [tempFilterValue, setTempFilterValue] = useState(filterValue);
 
-    const handleAuthorChange = (e) => {
-        setTempFilterValue(e.target.value);
-    }
-
-    const handleGenreChange = (e) => {
-        console.log(e.target.value)
+    const handleValueChange = (e) => {
         setTempFilterValue(e.target.value);
     }
 
@@ -99,7 +94,7 @@ function Filters({
                                         id="author-select"
                                         value={tempFilterValue}
                                         label={i18n.t("default:_AUTHOR")}
-                                        onChange={handleAuthorChange}
+                                        onChange={handleValueChange}
                                     >
                                         {authors.map((author, ind) => {
                                             return <MenuItem key={ind} value={author.name}>{author.name}</MenuItem>
@@ -120,7 +115,7 @@ function Filters({
                                         id="genre-select"
                                         value={tempFilterValue}
                                         label={i18n.t("default:_GENRE")}
-                                        onChange={handleGenreChange}
+                                        onChange={handleValueChange}
                                     >
                                         {GENRES.map((genre, ind) => {
                                             return <MenuItem key={ind} value={genre.value}>{genre.name}</MenuItem>
@@ -132,6 +127,22 @@ function Filters({
                         <Grid container alignItems="center"  className={classes.formRow}>
                             <Grid item xs={5}>
                                 <FormControlLabel value="nationality" control={<Radio />} label={i18n.t("default:_NATIONALITY")} />
+                            </Grid>
+                            <Grid className={classes.select} item xs={7}>
+                                <FormControl fullWidth>
+                                    <InputLabel id="nationality-select-label">{i18n.t("default:_NATIONALITY")}</InputLabel>
+                                    <Select
+                                        labelId="nationality-select-label"
+                                        id="nationality-select"
+                                        value={tempFilterValue}
+                                        label={i18n.t("default:_NATIONALITY")}
+                                        onChange={handleValueChange}
+                                    >
+                                        {NATIONALITIES.map((nationality, ind) => {
+                                            return <MenuItem key={ind} value={nationality.value}>{nationality.name}</MenuItem>
+                                        })}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </RadioGroup>
