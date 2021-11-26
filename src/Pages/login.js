@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import GoogleAvatar from '../img/google-button.png';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -69,6 +70,19 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  googleContainer: {
+    marginTop: 20
+  },
+  googleButton: {
+    "&:hover": {
+      background: "white",
+      border: "1px solid #212121"
+    }
+  },
+  googleAvatar: {
+    width: 14,
+    height: 14
+  }
 }));
 
 function Login({
@@ -123,6 +137,14 @@ function Login({
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          <Grid container className={classes.googleContainer}>
+            <Button className={classes.googleButton} variant="outlined" fullWidth startIcon={
+                <Avatar className={classes.googleAvatar} alt={`Google button`} src={GoogleAvatar} />
+              }
+            >
+              Sign in with google
+            </Button>
+          </Grid>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
