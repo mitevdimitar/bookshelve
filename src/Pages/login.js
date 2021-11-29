@@ -15,7 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginImg from '../img/login.jpg';
-import { signin } from "../services/auth";
+import { signin, googleSignIn } from "../services/auth";
 import Notification from '../Components/notification';
 import { mapStateToProps } from '../services/redux';
 import { SIGN_SUCCESS } from '../store/actions/action_types';
@@ -118,6 +118,13 @@ function Login({
     });
   }
 
+  const onGoogleSignIn = async () => {
+    const response = await googleSignIn(dispatch);
+    if (response.uid) {
+      history.push('/');
+    }
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -137,13 +144,16 @@ function Login({
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Grid container className={classes.googleContainer}>
+          <Grid container className={classes.googleContainer} onClick={onGoogleSignIn}>
             <Button className={classes.googleButton} variant="outlined" fullWidth startIcon={
                 <Avatar className={classes.googleAvatar} alt={`Google button`} src={GoogleAvatar} />
               }
             >
-              Sign in with google
+              with google
             </Button>
+          </Grid>
+          <Grid container justify="center" className={classes.googleContainer}>
+              or
           </Grid>
           <form className={classes.form} noValidate>
             <TextField
@@ -155,7 +165,7 @@ function Login({
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              //autoFocus
               onChange={onEnterEmail}
               value={email}
             />
