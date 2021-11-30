@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import GoogleAvatar from '../img/google-button.png';
+import FacebookAvatar from '../img/facebook-button.png';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -70,16 +71,17 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  googleContainer: {
+  socialContainer: {
     marginTop: 20
   },
-  googleButton: {
+  socialButton: {
+    width: "48%",
     "&:hover": {
       background: "white",
       border: "1px solid #212121"
     }
   },
-  googleAvatar: {
+  socialAvatar: {
     width: 14,
     height: 14
   }
@@ -144,12 +146,18 @@ function Login({
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Grid container className={classes.googleContainer} onClick={onGoogleSignIn}>
-            <Button className={classes.googleButton} variant="outlined" fullWidth startIcon={
-                <Avatar className={classes.googleAvatar} alt={`Google button`} src={GoogleAvatar} />
+          <Grid container justify="space-between" className={classes.socialContainer}>
+            <Button onClick={onGoogleSignIn} className={classes.socialButton} variant="outlined" startIcon={
+                <Avatar className={classes.socialAvatar} alt={`Google button`} src={GoogleAvatar} />
               }
             >
-              with google
+              with Google
+            </Button>
+            <Button className={classes.socialButton} variant="outlined" startIcon={
+                <Avatar className={classes.socialAvatar} alt={`Facebook button`} src={FacebookAvatar} />
+              }
+            >
+              with Facebook
             </Button>
           </Grid>
           <Grid container justify="center" className={classes.googleContainer}>
