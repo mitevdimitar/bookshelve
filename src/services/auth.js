@@ -77,6 +77,36 @@ export const googleSignIn = (dispatch) => {
     });
 };
 
+// Signing in with Firebase using Facebook
+export const facebookSignIn = (dispatch) => {
+  const provider = new firebase.auth.FacebookAuthProvider();
+  return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      //const credential = result.credential;
+
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      //const token = credential.accessToken;
+
+      // The signed-in user info.
+      const user = result.user;
+      dispatch({
+        type: SIGN_SUCCESS,
+        data: "Succesfully logged in!"
+      });
+      return user;
+    }).catch((error) => {
+      // Handle Errors here.
+      dispatch({
+        type: SIGN_ERROR,
+        data: error.message
+      });
+      return error.message;
+    });
+};
+
 //Signing out from Firebase
 export const signout = () => {
   try {

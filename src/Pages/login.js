@@ -16,7 +16,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import LoginImg from '../img/login.jpg';
-import { signin, googleSignIn } from "../services/auth";
+import { signin, googleSignIn, facebookSignIn } from "../services/auth";
 import Notification from '../Components/notification';
 import { mapStateToProps } from '../services/redux';
 import { SIGN_SUCCESS } from '../store/actions/action_types';
@@ -127,6 +127,13 @@ function Login({
     }
   }
 
+  const onFacebookSignIn = async () => {
+    const response = await facebookSignIn(dispatch);
+    if (response.uid) {
+      history.push('/');
+    }
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -153,7 +160,7 @@ function Login({
             >
               with Google
             </Button>
-            <Button className={classes.socialButton} variant="outlined" startIcon={
+            <Button onClick={onFacebookSignIn}  className={classes.socialButton} variant="outlined" startIcon={
                 <Avatar className={classes.socialAvatar} alt={`Facebook button`} src={FacebookAvatar} />
               }
             >
