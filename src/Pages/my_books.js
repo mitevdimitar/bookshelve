@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltersModal from "../Components/filters_modal";
 import Chip from '@material-ui/core/Chip';
+import BookAutocomplete from "../Components/book_autocomplete";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         width: "95%",
         fontWeight: 600,
         fontStyle: "oblique"
-    },
+    }
 }));
   
 
@@ -130,14 +131,17 @@ function MyBooks({
                 />
             )}
             <Grid container justify="space-between" item className={classes.button}>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={openBookModal}
-                >
-                    {i18n.t("default:_ADD_BOOK")}
-                </Button>
-                <Grid item>
+                <Grid container item xs={9}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={openBookModal}
+                    >
+                        {i18n.t("default:_ADD_BOOK")}
+                    </Button>
+                    <BookAutocomplete />
+                </Grid>
+                <Grid item xs={1}>
                     {filterValue && (
                         <Chip variant="outlined" color="primary" label={filterValue} onDelete={handleDelete} />
                     )}
