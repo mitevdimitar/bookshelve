@@ -139,7 +139,7 @@ function MyBooks({
                     >
                         {i18n.t("default:_ADD_BOOK")}
                     </Button>
-                    <BookAutocomplete />
+                    <BookAutocomplete books={books} />
                 </Grid>
                 <Grid item xs={1}>
                     {filterValue && (

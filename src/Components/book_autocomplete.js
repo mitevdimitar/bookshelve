@@ -16,12 +16,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function BookAutocomplete() {
+function BookAutocomplete({
+    books
+}) {
     const classes = useStyles();
-    const top100Films = [
-        { title: 'It', author: "Stephen King" },
-        { title: 'The Dark Tower', author: "Stephen King" },
-    ];
 
     return (
         <Autocomplete
@@ -29,7 +27,7 @@ function BookAutocomplete() {
             freeSolo
             disableClearable={true}
             style={{width: isMobileDevice() ? 300 : 600, marginLeft: isMobileDevice() ? 0 : 30}}
-            options={top100Films.map((option) => `${option.title}`)}
+            options={books.map((option) => option && option[1] && `${option[1].title}, ${option[1].author}`)}
             className={classes.autocomplete}
             renderInput={(params) => 
                 <>
@@ -37,9 +35,6 @@ function BookAutocomplete() {
                         variant="outlined" 
                         color="primary" 
                         {...params} 
-                        /* InputProps={{
-                            endAdornment: <SearchIcon color="primary" style={{cursor: "pointer"}} />,
-                        }} */
                         label="Search by book or Author"
                     />
                     <SearchIcon className={classes.searchIcon} color="primary" style={{cursor: "pointer"}} />
