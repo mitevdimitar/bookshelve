@@ -39,8 +39,9 @@ function MyBooks({
     dispatch
 }) {
     const classes = useStyles();
-    const { filtersModalOpen, bookModalOpen, filterValue, filterType } = myBooks;
+    const { filtersModalOpen, bookModalOpen, filterValue, filterType, allBooks } = myBooks;
     const [books, setBooks] = useState([]);
+    console.log(allBooks)
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
@@ -60,7 +61,6 @@ function MyBooks({
                     }
                     break;
                 case 'nationality':
-                    console.log({book})
                     if (filterValue === bookValue.nationality) {
                         return book;
                     }
@@ -73,14 +73,23 @@ function MyBooks({
         }
     }
 
+    /* const filterBooksByQuery = (query) => {
+        console.log(query)
+    } */
+
     const getAllBooks = useCallback(async () => {   
         const response = token && await getBooks(id, token);
         if (response && response.data) {
             const books = Object.entries(response.data);
-            setBooks(books.filter(filterBooks));
+            dispatch(BooksActions.setAllBooks(books));
         }
         // eslint-disable-next-line
-    }, [id, token, filterValue]);
+    }, [id, token]);
+
+    const getCurrentBooks = useCallback(async () => {   
+        setBooks(allBooks.filter(filterBooks));
+        // eslint-disable-next-line
+    }, [allBooks, filterValue]);
 
     const getAllAuthors = useCallback(async () => {   
         const response = token && await getAuthors(id, token);
@@ -94,6 +103,10 @@ function MyBooks({
         getAllBooks();
         getAllAuthors();
     }, [getAllBooks, getAllAuthors]);
+
+    useEffect(()=>{
+        getCurrentBooks();
+    }, [getCurrentBooks]);
 
     const openBookModal = () => {
         dispatch(BooksActions.setBookModalOpen(true));
@@ -139,7 +152,7 @@ function MyBooks({
                     >
                         {i18n.t("default:_ADD_BOOK")}
                     </Button>
-                    <BookAutocomplete books={books} />
+                    <BookAutocomplete filter books={books} />
                 </Grid>
                 <Grid item xs={1}>
                     {filterValue && (

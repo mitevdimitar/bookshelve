@@ -5,3 +5,4 @@ export const SET_BOOK_MODE = "SET_BOOK_MODE";
 export const SET_AUTHORS = "SET_AUTHORS";
 export const SET_FILTER_TYPE = "SET_FILTER_TYPE";
 export const SET_FILTER_VALUE = "SET_FILTER_VALUE";
+export const SET_ALL_BOOKS = "SET_ALL_BOOKS";
