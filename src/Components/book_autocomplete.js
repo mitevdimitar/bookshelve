@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { isMobileDevice } from "../services/mobile";
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../services/redux';
+import { BooksActions } from '../store/actions/action_types';
 
 const useStyles = makeStyles((theme) => ({
     autocomplete: {
@@ -17,9 +20,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BookAutocomplete({
-    books
+    books,
+    dispatch
 }) {
     const classes = useStyles();
+    const [searchValue, setSearchValue] = useState("");
+
+    const onSearchClick = () => {
+        dispatch(BooksActions.setFilterValue(searchValue));
+        dispatch(BooksActions.setFilterType('autocomplete'));
+    }
+
+    const onSearchValueChange = (e) => {
+        setSearchValue(e.target.value);
+    }
 
     return (
         <Autocomplete
@@ -36,12 +50,13 @@ function BookAutocomplete({
                         color="primary" 
                         {...params} 
                         label="Search by book or Author"
+                        onChange={onSearchValueChange}
                     />
-                    <SearchIcon className={classes.searchIcon} color="primary" style={{cursor: "pointer"}} />
+                    <SearchIcon onClick={onSearchClick} className={classes.searchIcon} color="primary" style={{cursor: "pointer"}} />
                 </>
             }
         />
     )
 }
 
-export default BookAutocomplete;
+export default connect(mapStateToProps)(BookAutocomplete);

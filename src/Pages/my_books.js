@@ -41,7 +41,6 @@ function MyBooks({
     const classes = useStyles();
     const { filtersModalOpen, bookModalOpen, filterValue, filterType, allBooks } = myBooks;
     const [books, setBooks] = useState([]);
-    console.log(allBooks)
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
@@ -65,6 +64,10 @@ function MyBooks({
                         return book;
                     }
                     break;
+                case 'autocomplete':
+                    console.log('in autocomplete', filterValue)
+                    return book;
+                    //break;
                 default:
                     return book;
                 }
