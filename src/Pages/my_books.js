@@ -65,9 +65,10 @@ function MyBooks({
                     }
                     break;
                 case 'autocomplete':
-                    console.log('in autocomplete', filterValue)
-                    return book;
-                    //break;
+                    if (bookValue.author.toLowerCase().includes(filterValue.toLowerCase()) || bookValue.title.toLowerCase().includes(filterValue.toLowerCase)) {
+                        return book;
+                    }
+                    break;
                 default:
                     return book;
                 }
@@ -75,10 +76,6 @@ function MyBooks({
             return book;
         }
     }
-
-    /* const filterBooksByQuery = (query) => {
-        console.log(query)
-    } */
 
     const getAllBooks = useCallback(async () => {   
         const response = token && await getBooks(id, token);
