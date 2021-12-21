@@ -69,6 +69,11 @@ function MyBooks({
                         return book;
                     }
                     break;
+                case 'option-select':
+                    if (bookValue.title === filterValue) {
+                        return book;
+                    }
+                    break;
                 default:
                     return book;
                 }
@@ -152,7 +157,7 @@ function MyBooks({
                     >
                         {i18n.t("default:_ADD_BOOK")}
                     </Button>
-                    <BookAutocomplete filter books={books} />
+                    <BookAutocomplete filter books={allBooks} />
                 </Grid>
                 <Grid item xs={1}>
                     {filterValue && (

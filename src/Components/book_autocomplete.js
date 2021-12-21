@@ -35,6 +35,15 @@ function BookAutocomplete({
         setSearchValue(e.target.value);
     }
 
+    const onOptionSelect = (val, reason) => {
+        if (reason === 'select-option') {
+            const titleArr = val.split(',');
+            const title = titleArr.length > 0 && titleArr[0];
+            dispatch(BooksActions.setFilterValue(title));
+            dispatch(BooksActions.setFilterType('option-select'));
+        }
+    }
+
     return (
         <Autocomplete
             id="free-solo-demo"
@@ -55,6 +64,7 @@ function BookAutocomplete({
                     <SearchIcon onClick={onSearchClick} className={classes.searchIcon} color="primary" style={{cursor: "pointer"}} />
                 </>
             }
+            onChange={(e, val, reason)=>onOptionSelect(val, reason)}
         />
     )
 }
