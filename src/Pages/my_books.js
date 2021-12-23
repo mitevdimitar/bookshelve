@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import FiltersModal from "../Components/filters_modal";
 import Chip from '@material-ui/core/Chip';
+import Pagination from '@material-ui/lab/Pagination';
 import BookAutocomplete from "../Components/book_autocomplete";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
         width: "95%",
         fontWeight: 600,
         fontStyle: "oblique"
+    },
+    pagination: {
+        marginTop: 20
     }
 }));
   
@@ -202,6 +206,11 @@ function MyBooks({
                     )
                 })}
             </>
+            {books.length > 0 && (
+                <Grid container justify="center" className={classes.pagination}>
+                    <Pagination count={10} color="primary" />
+                </Grid>
+            )}
         </Grid>
     )
 }
