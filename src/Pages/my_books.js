@@ -45,6 +45,7 @@ function MyBooks({
     const classes = useStyles();
     const { filtersModalOpen, bookModalOpen, filterValue, filterType, allBooks } = myBooks;
     const [books, setBooks] = useState([]);
+    const [page, setPage] = useState(1);
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
@@ -95,8 +96,9 @@ function MyBooks({
         // eslint-disable-next-line
     }, [id, token]);
 
-    const getCurrentBooks = useCallback(async () => {   
-        setBooks(allBooks.filter(filterBooks));
+    const getCurrentBooks = useCallback(async () => {
+        const filteredBooks = allBooks.filter(filterBooks);
+        setBooks(filteredBooks);
         // eslint-disable-next-line
     }, [allBooks, filterValue]);
 
@@ -138,6 +140,10 @@ function MyBooks({
     const handleDelete = () => {
         dispatch(BooksActions.setFilterValue(""));
     };
+
+    const changePage = (e, num) => {
+        setPage(num);
+    }
 
     return(
         <Grid container className={classes.root}>
@@ -208,7 +214,12 @@ function MyBooks({
             </>
             {books.length > 0 && (
                 <Grid container justify="center" className={classes.pagination}>
-                    <Pagination count={10} color="primary" />
+                    <Pagination 
+                        count={10} 
+                        color="primary" 
+                        page={page} 
+                        onChange={changePage} 
+                    />
                 </Grid>
             )}
         </Grid>
