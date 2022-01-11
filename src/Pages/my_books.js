@@ -46,6 +46,7 @@ function MyBooks({
     const { filtersModalOpen, bookModalOpen, filterValue, filterType, allBooks } = myBooks;
     const [books, setBooks] = useState([]);
     const [page, setPage] = useState(1);
+    const [count, setCount] = useState(1);
 
     const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
     const id = firebase.uid;
@@ -96,9 +97,14 @@ function MyBooks({
         // eslint-disable-next-line
     }, [id, token]);
 
-    const getCurrentBooks = useCallback(async () => {
+    const getCurrentBooks = useCallback(async (num) => {
         const filteredBooks = allBooks.filter(filterBooks);
-        setBooks(filteredBooks);
+        const start = (num - 1) * 10;
+        const end = start + 10;
+        const booksOnPage = filteredBooks.slice(start, end);
+        const currentCount = Math.ceil(filteredBooks.length / 10);
+        setBooks(booksOnPage);
+        setCount(currentCount);
         // eslint-disable-next-line
     }, [allBooks, filterValue]);
 
@@ -116,7 +122,7 @@ function MyBooks({
     }, [getAllBooks, getAllAuthors]);
 
     useEffect(()=>{
-        getCurrentBooks();
+        getCurrentBooks(1);
     }, [getCurrentBooks]);
 
     const openBookModal = () => {
@@ -143,6 +149,7 @@ function MyBooks({
 
     const changePage = (e, num) => {
         setPage(num);
+        getCurrentBooks(num);
     }
 
     return(
@@ -215,7 +222,7 @@ function MyBooks({
             {books.length > 0 && (
                 <Grid container justify="center" className={classes.pagination}>
                     <Pagination 
-                        count={10} 
+                        count={count}
                         color="primary" 
                         page={page} 
                         onChange={changePage} 
