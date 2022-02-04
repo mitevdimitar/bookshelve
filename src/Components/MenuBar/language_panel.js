@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LanguagePanel({
-    firebase,
+    firebaseReducer,
     settings
 }) {
     const classes = useStyles();
     const { lang } = settings;
-    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+    const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
     const [editLangMode, setEditLangMode] = useState(false);
 
     const onFlagClick = () => {
@@ -47,7 +47,7 @@ function LanguagePanel({
 
     useEffect(()=>{
         async function getLanguage() {
-            const id = firebase.uid;
+            const id = firebaseReducer.uid;
             const response = await getSettings(id, token);
             if (response && response.data) {
                 const { lang } = response.data.settings;
@@ -66,7 +66,7 @@ function LanguagePanel({
             type: SET_LANGUAGE,
             data: lang === 'en' ? 'bg' : 'en'
         }); */
-        const id = firebase.uid;
+        const id = firebaseReducer.uid;
         const data = {
             lang: lang === 'en' ? 'bg' : 'en'
         }

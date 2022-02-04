@@ -29,14 +29,14 @@ const theme = createMuiTheme({
 
 function App({
   settings,
-  firebase,
+  firebaseReducer,
   dispatch
 }) {
   const { lang } = settings;
-  const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+  const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
 
   const setSettings = useCallback(async () => {
-    const id = firebase.uid;
+    const id = firebaseReducer.uid;
     const response = await getSettings(id, token);
     if (response && response.data) {
       const { lang } = response.data.settings;
@@ -45,13 +45,13 @@ function App({
         data: lang
       });
     }
-  }, [firebase.uid, dispatch, token])
+  }, [firebaseReducer.uid, dispatch, token])
 
   useEffect(()=>{
-    if (!firebase.isEmpty) {
+    if (!firebaseReducer.isEmpty) {
       setSettings();
     }
-  }, [lang, setSettings, firebase.isEmpty]);
+  }, [lang, setSettings, firebaseReducer.isEmpty]);
 
   return (
     <ThemeProvider theme={theme}>

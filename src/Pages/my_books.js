@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import BookModal from "../Components/book_modal";
-import { getBooks, getAuthors } from "../services/books";
 import BookRow from "../Components/book_row";
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
   
 
 function MyBooks({
-    firebase,
     myBooks,
     dispatch
 }) {
@@ -47,9 +45,6 @@ function MyBooks({
     const [books, setBooks] = useState([]);
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
-
-    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
-    const id = firebase.uid;
 
     const filterBooks = (book) => {
         const bookValue = book[1];
@@ -88,15 +83,6 @@ function MyBooks({
         }
     }
 
-    const getAllBooks = useCallback(async () => {   
-        const response = token && await getBooks(id, token);
-        if (response && response.data) {
-            const books = Object.entries(response.data);
-            dispatch(BooksActions.setAllBooks(books));
-        }
-        // eslint-disable-next-line
-    }, [id, token]);
-
     const getCurrentBooks = useCallback(async (num) => {
         const filteredBooks = allBooks.filter(filterBooks);
         const start = (num - 1) * 10;
@@ -107,19 +93,6 @@ function MyBooks({
         setCount(currentCount);
         // eslint-disable-next-line
     }, [allBooks, filterValue]);
-
-    const getAllAuthors = useCallback(async () => {   
-        const response = token && await getAuthors(id, token);
-        if (response && response.data) {
-            const authorsArr = Object.values(response.data)
-            dispatch(BooksActions.setAuthors(authorsArr));
-        }
-    }, [id, token, dispatch]);
-    
-    useEffect(()=>{
-        getAllBooks();
-        getAllAuthors();
-    }, [getAllBooks, getAllAuthors]);
 
     useEffect(()=>{
         getCurrentBooks(1);
@@ -157,7 +130,7 @@ function MyBooks({
             {bookModalOpen && (
                 <BookModal
                     handleClose={handleClose}
-                    refresh={getAllBooks}
+                    //refresh={getAllBooks}
                 />
             )}
             {filtersModalOpen && (
@@ -214,7 +187,7 @@ function MyBooks({
                             key={i} 
                             book={book} 
                             i={i}
-                            refresh={getAllBooks}
+                            //refresh={getAllBooks}
                         />
                     )
                 })}

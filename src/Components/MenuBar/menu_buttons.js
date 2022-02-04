@@ -7,12 +7,12 @@ import { mapStateToProps } from '../../services/redux';
 import LogoutButton from './logout_button';
 import i18n from '../../i18n';
 
-function MenuButtons({ firebase }) {
+function MenuButtons({ firebaseReducer }) {
     return (
         <>
             <Grid container item xs={10} justify="flex-end" alignItems="center">
                 {
-                    firebase.isEmpty ? (
+                    firebaseReducer.isEmpty ? (
                         <Button href="/login" color="inherit">
                             {i18n.t("default:_LOGIN")}
                         </Button>
@@ -26,7 +26,7 @@ function MenuButtons({ firebase }) {
                     )
                 }
             </Grid>
-            {!firebase.isEmpty && (
+            {!firebaseReducer.isEmpty && (
                 <Grid container justify="flex-end" alignItems="center" item xs={1}>
                     <LanguagePanel />
                 </Grid>
