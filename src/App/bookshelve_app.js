@@ -15,6 +15,8 @@ import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { getSettings } from '../services/settings';
 import { SET_LANGUAGE } from '../store/actions/action_types';
+import { getBooks, getAuthors } from "../services/books";
+import { BooksActions } from '../store/actions/action_types';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,6 +36,7 @@ function App({
 }) {
   const { lang } = settings;
   const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
+  const id = firebaseReducer.uid;
 
   const setSettings = useCallback(async () => {
     const id = firebaseReducer.uid;
@@ -52,6 +55,30 @@ function App({
       setSettings();
     }
   }, [lang, setSettings, firebaseReducer.isEmpty]);
+
+  const getAllBooks = useCallback(async () => {
+    if (!token) return;
+    const response = await getBooks(id, token);
+    if (response && response.data) {
+        const books = Object.entries(response.data);
+        dispatch(BooksActions.setAllBooks(books));
+    }
+    // eslint-disable-next-line
+  }, [id, token]);
+
+  const getAllAuthors = useCallback(async () => {   
+    const response = token && await getAuthors(id, token);
+    if (response && response.data) {
+        const authorsArr = Object.values(response.data)
+        dispatch(BooksActions.setAuthors(authorsArr));
+    }
+  }, [id, token, dispatch]);
+
+  useEffect(()=>{
+    getAllBooks();
+    getAllAuthors();
+  }, [getAllBooks, getAllAuthors]);
+
 
   return (
     <ThemeProvider theme={theme}>

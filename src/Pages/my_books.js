@@ -42,7 +42,7 @@ function MyBooks({
 }) {
     const classes = useStyles();
     const { filtersModalOpen, bookModalOpen, filterValue, filterType, allBooks } = myBooks;
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState(allBooks);
     const [page, setPage] = useState(1);
     const [count, setCount] = useState(1);
 

@@ -39,11 +39,11 @@ function BookRow({
     book,
     i,
     dispatch,
-    firebase,
+    firebaseReducer,
     refresh
 }) {
     const classes = useStyles();
-    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+    const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
 
     const onEditClick = () => {
         dispatch(BooksActions.setBookModalOpen(true));
@@ -52,7 +52,7 @@ function BookRow({
     }
 
     const onDeleteClick = async () => {
-        const uid = firebase.uid;
+        const uid = firebaseReducer.uid;
         const bookId = book && book.id;
         await deleteBook(uid, token, bookId);
         refresh();
