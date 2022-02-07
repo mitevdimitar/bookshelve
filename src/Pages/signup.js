@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 function Signup({
   auth,
   dispatch,
-  firebase
+  firebaseReducer
 }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
@@ -78,7 +78,7 @@ function Signup({
   const [lastName, setLastName] = useState(""); 
   const history = useHistory();
   const { signError, message } = auth;
-  const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+  const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
 
   const onEnterEmail = (e) => {
     setEmail(e.target.value);

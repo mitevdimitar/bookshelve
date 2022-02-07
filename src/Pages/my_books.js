@@ -130,7 +130,6 @@ function MyBooks({
             {bookModalOpen && (
                 <BookModal
                     handleClose={handleClose}
-                    //refresh={getAllBooks}
                 />
             )}
             {filtersModalOpen && (
@@ -187,7 +186,6 @@ function MyBooks({
                             key={i} 
                             book={book} 
                             i={i}
-                            //refresh={getAllBooks}
                         />
                     )
                 })}

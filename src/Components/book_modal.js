@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
-import { addAuthor, addBook, editBook } from '../services/books';
+import { addAuthor, addBook, editBook, getBooks } from '../services/books';
 import { connect } from "react-redux";
 import { mapStateToProps } from '../services/redux';
 import { isMobileDevice } from '../services/mobile';
@@ -39,14 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
 function BookModal({
     handleClose,
-    firebase,
-    refresh,
+    firebaseReducer,
     myBooks,
     dispatch
 }) {
     const classes = useStyles();
     const { bookModalOpen, currentBook, bookMode, authors } = myBooks;
-    const token = firebase.stsTokenManager && firebase.stsTokenManager.accessToken;
+    const token = firebaseReducer.stsTokenManager && firebaseReducer.stsTokenManager.accessToken;
+    const id = firebaseReducer.uid;
     const [author, setAuthor] = useState(currentBook ? currentBook.author : "");
     const [title, setTitle] = useState(currentBook ? currentBook.title : "");
     const [nationality, setNationality] = useState(currentBook ? currentBook.nationality : "");
@@ -96,7 +96,7 @@ function BookModal({
             code,
             link
         }
-        const uid = firebase.uid;
+        const uid = firebaseReducer.uid;
         const bookId = currentBook && currentBook.id;
         bookMode === "add" ? await addBook(uid, book, token) : await editBook(uid, book, token, bookId);
         if (bookMode === "add") {
@@ -112,8 +112,14 @@ function BookModal({
                 updatedAuthors.push(bookAuthor);
                 dispatch(BooksActions.setAuthors(updatedAuthors));
             }
+            const booksResponse = await getBooks(id, token);
+            if (booksResponse) {
+                const {data} = booksResponse;
+                const books = Object.entries(data);
+                dispatch(BooksActions.setAllBooks(books));
+            }
         }
-        refresh();
+        
         resetSelection();
         handleClose();
     }
