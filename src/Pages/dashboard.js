@@ -29,11 +29,19 @@ function Dashboard({
     console.log({allBooks})
 
     return (
+      <>
+        {allBooks.length > 0 ? (
+          <Grid container>
+            Dashboard
+          </Grid>
+        ) : (
         <Grid container className={classes.root}>
           <Grid container item alignItems="center" justify="center">
               {user && `Welcome, ${user.displayName}!`}
           </Grid>
         </Grid>
+        )}
+      </>
     )
 }
 
