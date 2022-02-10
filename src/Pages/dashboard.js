@@ -6,6 +6,7 @@ import Pergament from '../img/pergament.jpg';
 import { isMobileDevice } from '../services/mobile';
 import { mapStateToProps } from '../services/redux';
 import { connect } from "react-redux";
+import PieComponent from '../Components/Dashboard/pie_chart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +33,15 @@ function Dashboard({
       <>
         {allBooks.length > 0 ? (
           <Grid container>
-            Dashboard
+            <Grid container item>
+              Cards
+            </Grid>
+            <Grid container item>
+              Pies
+              <Grid container item style={{height: 300, width: 300}}>
+                <PieComponent />
+              </Grid>
+            </Grid>
           </Grid>
         ) : (
         <Grid container className={classes.root}>
