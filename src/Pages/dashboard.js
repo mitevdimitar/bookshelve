@@ -43,7 +43,7 @@ function Dashboard({
                 <PieComponent />
               </Grid>
               <Grid container item style={{height: 300, width: 300}}>
-                <PieChart2 />
+                <PieChart2 books={allBooks} />
               </Grid>
             </Grid>
           </Grid>
