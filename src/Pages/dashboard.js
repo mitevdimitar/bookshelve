@@ -28,7 +28,6 @@ function Dashboard({
     const user = firebase.auth().currentUser;
     const classes = useStyles();
     const { allBooks } = myBooks;
-    console.log({allBooks})
 
     return (
       <>
