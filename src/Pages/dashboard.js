@@ -7,7 +7,7 @@ import { isMobileDevice } from '../services/mobile';
 import { mapStateToProps } from '../services/redux';
 import { connect } from "react-redux";
 import PieComponent from '../Components/Dashboard/pie_chart';
-import PieChart2 from '../Components/Dashboard/pie_chart_v2';
+import AuthorsPieChart from '../Components/Dashboard/authors_pie_chart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,7 +42,7 @@ function Dashboard({
                 <PieComponent />
               </Grid>
               <Grid container item style={{height: 300, width: 300}}>
-                <PieChart2 books={allBooks} />
+                <AuthorsPieChart books={allBooks} />
               </Grid>
             </Grid>
           </Grid>
