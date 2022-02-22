@@ -8,6 +8,7 @@ import { mapStateToProps } from '../services/redux';
 import { connect } from "react-redux";
 import PieComponent from '../Components/Dashboard/pie_chart';
 import AuthorsPieChart from '../Components/Dashboard/authors_pie_chart';
+import Counter from '../Components/Dashboard/counter';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +36,9 @@ function Dashboard({
           <Grid container>
             <Grid container item>
               Cards
+              <Grid container item>
+                <Counter />
+              </Grid>
             </Grid>
             <Grid container item>
               Pies
