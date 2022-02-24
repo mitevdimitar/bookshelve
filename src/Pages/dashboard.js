@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import PieComponent from '../Components/Dashboard/pie_chart';
 import AuthorsPieChart from '../Components/Dashboard/authors_pie_chart';
 import Counter from '../Components/Dashboard/counter';
+import Typography from '@material-ui/core/Typography';
+import i18n from '../i18n';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
       color: "grey",
       textAlign: "center"
     },
+    headerContainer: {
+      marginTop: 20
+    }
   }));
 
 function Dashboard({
@@ -35,13 +40,16 @@ function Dashboard({
         {allBooks.length > 0 ? (
           <Grid container>
             <Grid container item>
-              Cards
+              <Grid container justify='center' item className={classes.headerContainer}>
+                <Typography variant="h4" color="textSecondary">
+                  {i18n.t("default:_STATISTICS")}
+                </Typography>
+              </Grid>
               <Grid container item>
                 <Counter />
               </Grid>
             </Grid>
             <Grid container item>
-              Pies
               <Grid container item style={{height: 300, width: 300}}>
                 <PieComponent />
               </Grid>
