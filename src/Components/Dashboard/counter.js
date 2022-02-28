@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
@@ -43,26 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Counter({ widgetData }) {
+function Counter({ value, label }) {
   const classes = useStyles();
-  const [counterValue, setCounterValue] = useState(0);
-
-  const getCounterData = useCallback(async () => {
-    if (widgetData) {
-      const counter = widgetData ? widgetData.data.counter : 0;
-      setCounterValue(counter);
-    }
-  }, [widgetData]);
-
-  useEffect(() => {
-    getCounterData();
-  }, [getCounterData]);
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.contentRoot}>
         <Grid container justify="center" className={classes.counterValue}>
-          {counterValue}
+          {value}
         </Grid>
         <Grid container item style={{ height: "30px" }}>
           <Typography
@@ -71,7 +59,7 @@ function Counter({ widgetData }) {
             gutterBottom
             className={classes.text}
           >
-            Authors
+            {label}
           </Typography>
         </Grid>
       </CardContent>

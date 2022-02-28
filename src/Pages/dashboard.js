@@ -33,7 +33,7 @@ function Dashboard({
 }) {
     const user = firebase.auth().currentUser;
     const classes = useStyles();
-    const { allBooks } = myBooks;
+    const { allBooks, authors } = myBooks;
 
     return (
       <>
@@ -46,7 +46,10 @@ function Dashboard({
                 </Typography>
               </Grid>
               <Grid container item>
-                <Counter />
+                <Counter
+                  label="Authors"
+                  value={authors.length}
+                />
               </Grid>
             </Grid>
             <Grid container item>
