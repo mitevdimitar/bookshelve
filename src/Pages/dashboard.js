@@ -45,14 +45,18 @@ function Dashboard({
                   {i18n.t("default:_STATISTICS")}
                 </Typography>
               </Grid>
-              <Grid container item>
+              <Grid container justify='space-around' item>
+                <Counter
+                  label="Books"
+                  value={allBooks.length}
+                />
                 <Counter
                   label="Authors"
                   value={authors.length}
                 />
               </Grid>
             </Grid>
-            <Grid container item>
+            <Grid container justify="space-around" item>
               <Grid container item style={{height: 300, width: 300}}>
                 <PieComponent />
               </Grid>
