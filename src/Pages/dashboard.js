@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import firebase from "../services/firebase";
@@ -34,6 +34,18 @@ function Dashboard({
     const user = firebase.auth().currentUser;
     const classes = useStyles();
     const { allBooks, authors } = myBooks;
+    const [genres, setGenres] = useState(0);
+
+    const extractGenresInfo = useCallback(() => {
+      const bookGenres = allBooks.map((book) => book && book[1] && book[1].genre);
+      const uniqueBookGenres = [...new Set(bookGenres)]; 
+      setGenres(uniqueBookGenres.length)
+    }, [allBooks])
+
+    useEffect(()=>{
+      extractGenresInfo();
+      // eslint-disable-next-line
+    }, [allBooks])
 
     return (
       <>
@@ -47,12 +59,16 @@ function Dashboard({
               </Grid>
               <Grid container justify='space-around' item>
                 <Counter
-                  label="Books"
+                  label={i18n.t("default:_MY_BOOKS")}
                   value={allBooks.length}
                 />
                 <Counter
-                  label="Authors"
+                  label={i18n.t("default:_AUTHORS")}
                   value={authors.length}
+                />
+                <Counter
+                  label={i18n.t("default:_GENRES")}
+                  value={genres}
                 />
               </Grid>
             </Grid>
