@@ -6,8 +6,8 @@ import Pergament from '../img/pergament.jpg';
 import { isMobileDevice } from '../services/mobile';
 import { mapStateToProps } from '../services/redux';
 import { connect } from "react-redux";
-import PieComponent from '../Components/Dashboard/pie_chart';
 import AuthorsPieChart from '../Components/Dashboard/authors_pie_chart';
+import GenresPieChart from '../Components/Dashboard/genres_pie_chart';
 import Counter from '../Components/Dashboard/counter';
 import Typography from '@material-ui/core/Typography';
 import i18n from '../i18n';
@@ -74,10 +74,10 @@ function Dashboard({
             </Grid>
             <Grid container justify="space-around" item>
               <Grid container item style={{height: 300, width: 300}}>
-                <PieComponent />
+                <AuthorsPieChart books={allBooks} />
               </Grid>
               <Grid container item style={{height: 300, width: 300}}>
-                <AuthorsPieChart books={allBooks} />
+                <GenresPieChart books={allBooks} />
               </Grid>
             </Grid>
           </Grid>
