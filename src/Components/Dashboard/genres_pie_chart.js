@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import i18n from '../../i18n';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 export default function GenresPieChart({
   books
@@ -78,11 +79,28 @@ export default function GenresPieChart({
   useEffect(()=>{
     extractGenresInfo();
     // eslint-disable-next-line
-  }, [])
+  }, []);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: i18n.t("default:_GENRES"),
+        font: {
+          size: 18,
+          color: "rgba(0, 0, 0, 0.54)"
+      }
+      },
+    },
+  };
 
   return (
     genresData ? (
-      <Pie data={genresData} />
+      <Pie data={genresData} options={options} />
     ) : null
   );
 }

@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
     headerContainer: {
       marginTop: 20
+    },
+    countersContainer: {
+      marginBottom: 30
     }
   }));
 
@@ -51,7 +54,7 @@ function Dashboard({
       <>
         {allBooks.length > 0 ? (
           <Grid container>
-            <Grid container item>
+            <Grid container item className={classes.countersContainer}>
               <Grid container justify='center' item className={classes.headerContainer}>
                 <Typography variant="h4" color="textSecondary">
                   {i18n.t("default:_STATISTICS")}

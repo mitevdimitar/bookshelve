@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import i18n from '../../i18n';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 export default function AuthorsPieChart({
   books
@@ -74,6 +75,23 @@ export default function AuthorsPieChart({
     
   }
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: i18n.t("default:_AUTHORS"),
+        font: {
+          size: 18,
+          color: "rgba(0, 0, 0, 0.54)"
+      }
+      },
+    },
+  };
+
   useEffect(()=>{
     extractAuthorsInfo();
     // eslint-disable-next-line
@@ -81,7 +99,10 @@ export default function AuthorsPieChart({
 
   return (
     authorsData ? (
-      <Pie data={authorsData} />
+      <Pie 
+        data={authorsData}
+        options={options}
+      />
     ) : null
   );
 }
