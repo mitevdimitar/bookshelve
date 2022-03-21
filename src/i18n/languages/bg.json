@@ -5,9 +5,11 @@
 	"_ADD_BOOK": "Добави книга",
 	"_ADD": "Добави",
 	"_AUTHOR": "Автор",
+	"_AUTHORS": "Автори",
 	"_BOOK_TITLE": "Заглавие",
 	"_NATIONALITY": "Националност",
 	"_GENRE": "Жанр",
+	"_GENRES": "Жанрове",
 	"_BOOK_CODE": "Код на книгата",
 	"_GOODREADS_LINK": "Линк в goodreads",
 	"_BIOGRAPHY": "Биография",
@@ -24,5 +26,6 @@
 	"_THRILLER": "Трилър",
 	"_EDIT": "Промени",
 	"_FILTERS": "Филтрирай по",
-	"_APPLY": "Приложи"
+	"_APPLY": "Приложи",
+	"_STATISTICS": "Статистика"
 }
